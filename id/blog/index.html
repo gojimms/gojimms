@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Blog — gojimms</title>
+  <meta name="description" content="Catatan IT, sistem, dan pembelajaran di lapangan dari gojimms." />
+
+  <link rel="stylesheet" href="/assets/css/theme.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/animations.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <div class="scroll-progress" aria-hidden="true">
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+  </div>
+
+  <!-- HEADER (paste header ID) -->
+  <header class="site-header">
+    <nav class="navbar container">
+      <div class="brand">
+        <a href="/id/">gojimms</a>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="/id/">Home</a></li>
+        <li><a href="/id/about.html">About</a></li>
+        <li><a href="/id/portfolio.html">Portfolio</a></li>
+        <li><a href="/id/blog/" class="is-active">Blog</a></li>
+        <li><a href="/id/contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="/en/blog/" class="lang-switch">EN</a>
+        <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Open menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+      </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <div class="mobile-menu-inner container">
+        <div class="mobile-menu-top">
+          <p class="mobile-menu-title">Menu</p>
+          <button class="menu-close" id="menuClose">✕</button>
+        </div>
+
+        <ul class="mobile-links">
+          <li><a href="/id/">Home</a></li>
+          <li><a href="/id/about.html">About</a></li>
+          <li><a href="/id/portfolio.html">Portfolio</a></li>
+          <li><a href="/id/blog/">Blog</a></li>
+          <li><a href="/id/contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- BLOG HERO -->
+    <section class="section" data-reveal>
+      <div class="container blog-hero">
+        <div>
+          <p class="kicker">Blog</p>
+          <h1 class="hero-title" style="font-size: clamp(2rem, 4vw, 3rem);">
+            Catatan singkat, fokus ke hal yang bisa dipakai.
+          </h1>
+          <p class="hero-subtitle">
+            IT, sistem, dokumentasi, dan pembelajaran di lapangan. Ditulis ringkas biar cepat dipahami.
+          </p>
+        </div>
+
+        <div class="blog-controls">
+          <label class="sr-only" for="blogSearch">Cari artikel</label>
+          <input id="blogSearch" class="blog-search" type="search" placeholder="Cari artikel..." />
+          <div class="blog-tags">
+            <button class="tag-btn is-active" data-tag="all" type="button">All</button>
+            <button class="tag-btn" data-tag="it" type="button">IT</button>
+            <button class="tag-btn" data-tag="system" type="button">System</button>
+            <button class="tag-btn" data-tag="web" type="button">Web</button>
+            <button class="tag-btn" data-tag="docs" type="button">Docs</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POSTS -->
+    <section class="section section-soft" data-reveal>
+      <div class="container">
+        <div class="blog-list" id="blogList">
+          <!-- POSTS:START -->
+<a class="blog-item" href="/id/blog/post-1.html" data-tags="it system">
+  <div class="blog-left">
+    <p class="blog-tag">IT • System</p>
+    <h2 class="blog-title">Checklist migrasi aplikasi: biar nggak panik saat go-live</h2>
+    <p class="blog-excerpt">Yang wajib dicek sebelum, saat, dan setelah migrasi—versi ringkas dan praktis.</p>
+  </div>
+  <div class="blog-right">
+    <span class="blog-date">2026</span>
+    <span class="blog-read">5 min read</span>
+    <span class="work-arrow" aria-hidden="true">→</span>
+  </div>
+</a>
+
+<a class="blog-item" href="/id/blog/post-2.html" data-tags="docs">
+  <div class="blog-left">
+    <p class="blog-tag">Docs</p>
+    <h2 class="blog-title">Dokumentasi teknis yang enak dibaca itu seperti apa?</h2>
+    <p class="blog-excerpt">Dokumentasi bukan soal panjang, tapi soal bisa dipakai.</p>
+  </div>
+  <div class="blog-right">
+    <span class="blog-date">2026</span>
+    <span class="blog-read">4 min read</span>
+    <span class="work-arrow" aria-hidden="true">→</span>
+  </div>
+</a>
+<!-- POSTS:END -->
+        </div>
+
+        <p class="blog-empty" id="blogEmpty" style="display:none;">
+          Tidak ada artikel yang cocok. Coba kata kunci lain.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" data-reveal>
+      <div class="container cta">
+        <h2 class="cta-title">Ada topik yang ingin dibahas?</h2>
+        <p class="cta-text">Kamu bisa kirim ide artikel atau pertanyaan. Kalau cocok, aku tulis versi ringkasnya.</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="/id/contact.html">Contact</a>
+          <a class="btn btn-ghost" href="/id/portfolio.html">Portfolio</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-left">© <span id="year"></span> gojimms</p>
+      <div class="footer-right">
+        <a href="#" class="footer-link">LinkedIn</a>
+        <a href="#" class="footer-link">GitHub</a>
+        <a href="/id/contact.html" class="footer-link">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scrollTopBtn" class="scroll-top">↑</button>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <!-- Scripts -->
+  <script src="/assets/js/darkmode.js" defer></script>
+  <script src="/assets/js/nav.js" defer></script>
+  <script src="/assets/js/active-nav.js" defer></script>
+  <script src="/assets/js/motion.js" defer></script>
+  <script src="/assets/js/scroll-top.js" defer></script>
+  <script src="/assets/js/scroll-progress.js" defer></script>
+  <script src="/assets/js/page-transition.js" defer></script>
+
+  <!-- Blog filter/search -->
+  <script src="/assets/js/blog-filter.js" defer></script>
+</body>
+</html>

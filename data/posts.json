@@ -1,0 +1,45 @@
+{
+  "siteUrl": "https://gojimms.com",
+  "siteTitle": "gojimms — catatan IT yang bisa dipakai",
+  "siteDescription": "Catatan singkat seputar IT, sistem, dokumentasi, dan kerja lapangan.",
+  "author": "Jimmy Suseno",
+  "posts": [
+    {
+      "slug": "post-1",
+      "title": "Checklist migrasi aplikasi: biar nggak panik saat go-live",
+      "description": "Checklist praktis migrasi aplikasi: sebelum, saat, dan setelah go-live. Ringkas, jelas, dan bisa dipakai tim.",
+      "excerpt": "Yang wajib dicek sebelum, saat, dan setelah migrasi—versi ringkas dan praktis.",
+      "dateLabel": "2026",
+      "year": "2026",
+      "readingTime": "5 min read",
+      "tags": ["IT", "System"],
+      "tagsSlug": "it system",
+      "coverImage": "",
+      "toc": [
+        { "id": "ringkas", "label": "Versi ringkas" },
+        { "id": "sebelum", "label": "Sebelum migrasi" },
+        { "id": "saat", "label": "Saat migrasi" },
+        { "id": "setelah", "label": "Setelah migrasi" },
+        { "id": "penutup", "label": "Penutup" }
+      ],
+      "contentHtml": "<p class=\"lead\" id=\"ringkas\">Tulis intro di sini...</p>"
+    },
+    {
+      "slug": "post-2",
+      "title": "Dokumentasi teknis yang enak dibaca itu seperti apa?",
+      "description": "Struktur dokumentasi teknis yang bikin tim cepat paham.",
+      "excerpt": "Dokumentasi bukan soal panjang, tapi soal bisa dipakai.",
+      "dateLabel": "2026",
+      "year": "2026",
+      "readingTime": "4 min read",
+      "tags": ["Docs"],
+      "tagsSlug": "docs",
+      "coverImage": "",
+      "toc": [
+        { "id": "intro", "label": "Intro" },
+        { "id": "struktur", "label": "Struktur" }
+      ],
+      "contentHtml": "<p class=\"lead\" id=\"intro\">Ini post kedua.</p><h2 id=\"struktur\">Struktur</h2><p>Isi...</p>"
+    }
+  ]
+}

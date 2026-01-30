@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>gojimms — catatan IT yang bisa dipakai</title>
+    <link>https://gojimms.com</link>
+    <description>Catatan singkat seputar IT, sistem, dokumentasi, dan kerja lapangan.</description>
+    <language>id</language>
+    <generator>gojimms static generator</generator>
+    
+    <item>
+      <title>Checklist migrasi aplikasi: biar nggak panik saat go-live</title>
+      <link>https://gojimms.com/id/blog/post-1.html</link>
+      <guid>https://gojimms.com/id/blog/post-1.html</guid>
+      <description><![CDATA[Yang wajib dicek sebelum, saat, dan setelah migrasi—versi ringkas dan praktis.]]></description>
+    </item>
+    <item>
+      <title>Dokumentasi teknis yang enak dibaca itu seperti apa?</title>
+      <link>https://gojimms.com/id/blog/post-2.html</link>
+      <guid>https://gojimms.com/id/blog/post-2.html</guid>
+      <description><![CDATA[Dokumentasi bukan soal panjang, tapi soal bisa dipakai.]]></description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,55 @@
+<header class="site-header">
+  <nav class="navbar container">
+    <div class="brand">
+      <a href="/id/">gojimms</a>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <ul class="nav-links">
+      <li><a href="/id/" class="is-active">Home</a></li>
+      <li><a href="/id/about.html">About</a></li>
+      <li><a href="/id/portfolio.html">Portfolio</a></li>
+      <li><a href="/id/blog/">Blog</a></li>
+      <li><a href="/id/contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="/en/" class="lang-switch" aria-label="Switch to English">EN</a>
+
+      <button id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+
+      <!-- Mobile Menu Toggle -->
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Open menu"
+        aria-controls="mobileMenu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Panel -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-inner container">
+      <div class="mobile-menu-top">
+        <p class="mobile-menu-title">Menu</p>
+        <button class="menu-close" id="menuClose" aria-label="Close menu">✕</button>
+      </div>
+
+      <ul class="mobile-links">
+        <li><a href="/id/">Home</a></li>
+        <li><a href="/id/about.html">About</a></li>
+        <li><a href="/id/portfolio.html">Portfolio</a></li>
+        <li><a href="/id/blog/">Blog</a></li>
+        <li><a href="/id/contact.html">Contact</a></li>
+      </ul>
+
+      <div class="mobile-actions">
+        <a class="btn btn-ghost" href="/en/">Switch to EN</a>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>{{TITLE}} — gojimms</title>
+  <meta name="description" content="{{DESCRIPTION}}" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="{{TITLE}}" />
+  <meta property="og:description" content="{{DESCRIPTION}}" />
+  <meta property="og:url" content="{{CANONICAL_URL}}" />
+  <meta property="og:image" content="{{OG_IMAGE}}" />
+  <meta property="og:site_name" content="gojimms" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{TITLE}}" />
+  <meta name="twitter:description" content="{{DESCRIPTION}}" />
+  <meta name="twitter:image" content="{{OG_IMAGE}}" />
+
+  <link rel="stylesheet" href="/assets/css/theme.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/animation.css" />
+
+  <link rel="canonical" href="{{CANONICAL_URL}}" />
+
+  <link rel="alternate" hreflang="id" href="{{CANONICAL_URL}}" />
+  <link rel="alternate" hreflang="en" href="{{ALT_EN_URL}}" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{TITLE}}",
+  "description": "{{DESCRIPTION}}",
+  "author": {
+    "@type": "Person",
+    "name": "{{AUTHOR}}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "gojimms"
+  },
+  "datePublished": "{{DATE_PUBLISHED}}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{CANONICAL_URL}}"
+  }
+}
+</script>
+
+</head>
+
+<body>
+  <main id="main-content">
+    <section class="section">
+      <div class="container post-header">
+        <a href="/id/blog/" class="text-link">← Kembali ke Blog</a>
+
+        <p class="post-kicker">{{TAGS_TEXT}}</p>
+        <h1 class="post-title">{{TITLE}}</h1>
+
+        <div class="post-meta">
+          <span class="pill">{{YEAR}}</span>
+          <span class="pill">{{READING_TIME}}</span>
+          <span class="pill">by {{AUTHOR}}</span>
+        </div>
+
+        {{COVER_BLOCK}}
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container post-grid">
+        <aside class="post-toc">
+          <div class="toc-card">
+            <p class="toc-title">Daftar Isi</p>
+            {{TOC_BLOCK}}
+          </div>
+        </aside>
+
+        <article class="post-content">
+          {{CONTENT_HTML}}
+
+          <nav class="post-nav">
+            <a href="/id/blog/" class="post-nav-item">← Semua Artikel</a>
+            <div class="post-nav-sides">
+              {{PREV_BLOCK}}
+              {{NEXT_BLOCK}}
+            </div>
+          </nav>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
