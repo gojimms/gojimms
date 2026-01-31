@@ -7,7 +7,23 @@
     <title>Content Manager — gojimms</title>
   </head>
   <body>
+
+    <!-- Netlify Identity -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
     <!-- Decap CMS -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script src="https://unpkg.com/decap-cms@3.0.0/dist/decap-cms.js"></script>
+
+    <!-- INIT Identity (INI YANG KAMU BELUM) -->
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.init();
+
+        window.netlifyIdentity.on("recovery", () => {
+          console.log("Recovery mode active");
+        });
+      }
+    </script>
+
   </body>
 </html>
