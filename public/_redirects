@@ -1,2 +1,4 @@
-/admin/*  /admin/index.html  200
-/.netlify/identity/*  /admin/index.html  200
+/admin/*                   /admin/index.html  200
+/.netlify/identity/*       /admin/index.html  200
+/.netlify/identity/recover /admin/index.html  200
+/.netlify/identity/verify  /admin/index.html  200
