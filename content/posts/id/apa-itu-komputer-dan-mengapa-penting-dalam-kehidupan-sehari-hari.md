@@ -8,6 +8,7 @@ tags:
   - IT
   - Komputer
   - Teknologi
+  - Informasi
 coverImage: https://images.unsplash.com/photo-1518770660439-4636190af475
 ---
 Di era digital seperti sekarang, komputer telah menjadi bagian yang tidak terpisahkan dari kehidupan manusia. Hampir semua aktivitas, mulai dari belajar, bekerja, hingga berkomunikasi, melibatkan penggunaan komputer secara langsung maupun tidak langsung.
