@@ -3,7 +3,7 @@ title: Apa Itu Komputer dan Mengapa Penting dalam Kehidupan Sehari-hari?
 description: Artikel ini membahas pengertian komputer, fungsi utamanya, serta
   peran penting komputer dalam menunjang aktivitas belajar, kerja, dan kehidupan
   sehari-hari di era digital.
-date: 2026-01-31
+date: 2026-02-01
 tags:
   - IT
   - Komputer
