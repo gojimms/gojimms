@@ -1,21 +1,35 @@
 /**
- * Static Blog Generator (posts + index listing)
+ * Static Blog Generator (Decap CMS -> HTML)
+ * - Read Markdown from: content/posts/id/*.md and content/posts/en/*.md
+ * - Generate post pages: /id/blog/{slug}.html and /en/blog/{slug}.html
+ * - Update listings: /id/blog/index.html and /en/blog/index.html between:
+ *     <!-- POSTS:START --> ... <!-- POSTS:END -->
+ *
  * Run: node tools/generate-post.js
  */
+
 const fs = require("fs");
 const path = require("path");
 
 const ROOT = process.cwd();
-const templatePath = path.join(ROOT, "templates", "post.template.html");
-const dataPath = path.join(ROOT, "data", "posts.json");
 
-const outDir = path.join(ROOT, "id", "blog");
-const outDirEn = path.join(ROOT, "en", "blog");
-const blogIndexEnPath = path.join(outDirEn, "index.html");
-const blogIndexPath = path.join(outDir, "index.html");
+const POSTS_ID_DIR = path.join(ROOT, "content", "posts", "id");
+const POSTS_EN_DIR = path.join(ROOT, "content", "posts", "en");
+
+const TEMPLATE_PATH = path.join(ROOT, "templates", "post.template.html");
+
+const OUT_ID_DIR = path.join(ROOT, "id", "blog");
+const OUT_EN_DIR = path.join(ROOT, "en", "blog");
+
+const BLOG_INDEX_ID = path.join(OUT_ID_DIR, "index.html");
+const BLOG_INDEX_EN = path.join(OUT_EN_DIR, "index.html");
 
 function ensureDir(dir) {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+}
+
+function readFileSafe(p) {
+  return fs.existsSync(p) ? fs.readFileSync(p, "utf8") : null;
 }
 
 function escapeHtml(str = "") {
@@ -27,59 +41,222 @@ function escapeHtml(str = "") {
     .replaceAll("'", "&#039;");
 }
 
-function renderTOC(toc = []) {
-  if (!Array.isArray(toc) || toc.length === 0) {
-    return `<p style="margin:0;color:var(--muted);">—</p>`;
+/**
+ * Very small frontmatter parser:
+ * ---
+ * title: "..."
+ * description: "..."
+ * date: "2026-02-02"
+ * tags:
+ *   - IT
+ *   - Komputer
+ * coverImage: "/assets/....jpg"
+ * ---
+ */
+function parseFrontmatter(md) {
+  const fm = { data: {}, body: md };
+  const start = md.indexOf("---");
+  if (start !== 0) return fm;
+
+  const end = md.indexOf("\n---", 3);
+  if (end === -1) return fm;
+
+  const raw = md.slice(3, end).trim();
+  const body = md.slice(end + "\n---".length).trim();
+
+  const lines = raw.split("\n");
+  let currentKey = null;
+
+  for (const line of lines) {
+    // list item: "  - xxx"
+    const listMatch = line.match(/^\s*-\s+(.*)\s*$/);
+    if (listMatch && currentKey) {
+      fm.data[currentKey] = fm.data[currentKey] || [];
+      fm.data[currentKey].push(cleanYamlValue(listMatch[1]));
+      continue;
+    }
+
+    // key: value
+    const kv = line.match(/^([A-Za-z0-9_]+)\s*:\s*(.*)\s*$/);
+    if (kv) {
+      currentKey = kv[1];
+      const valueRaw = kv[2];
+      if (valueRaw === "" || valueRaw === "[]") {
+        fm.data[currentKey] = valueRaw === "[]" ? [] : "";
+      } else if (valueRaw === "|") {
+        // (not supported multi-line block here)
+        fm.data[currentKey] = "";
+      } else {
+        const v = cleanYamlValue(valueRaw);
+        fm.data[currentKey] = v;
+      }
+    }
   }
-  const items = toc
-    .map((t) => `<li><a href="#${escapeHtml(t.id)}">${escapeHtml(t.label)}</a></li>`)
-    .join("");
-  return `<ol class="toc-list">${items}</ol>`;
+
+  fm.body = body;
+  return fm;
 }
 
-function renderCover(coverImage) {
-  if (!coverImage) return "";
-  return `
-  <div class="post-cover">
-    <img src="${coverImage}" alt="Cover artikel" loading="lazy" />
-  </div>`;
+function cleanYamlValue(v) {
+  let s = String(v).trim();
+  // strip quotes
+  if ((s.startsWith('"') && s.endsWith('"')) || (s.startsWith("'") && s.endsWith("'"))) {
+    s = s.slice(1, -1);
+  }
+  return s;
 }
 
-function tagsText(tags = []) {
-  if (!Array.isArray(tags) || tags.length === 0) return "Blog";
-  return tags.join(" • ");
+/**
+ * Tiny markdown -> HTML converter (basic but usable)
+ */
+function mdToHtml(md) {
+  const lines = md.split("\n");
+  let html = "";
+  let inUl = false;
+  let inOl = false;
+  let inCode = false;
+
+  const closeLists = () => {
+    if (inUl) { html += "</ul>\n"; inUl = false; }
+    if (inOl) { html += "</ol>\n"; inOl = false; }
+  };
+
+  for (let rawLine of lines) {
+    let line = rawLine;
+
+    // code fence
+    if (line.trim().startsWith("```")) {
+      if (!inCode) {
+        closeLists();
+        inCode = true;
+        html += `<pre><code>`;
+      } else {
+        inCode = false;
+        html += `</code></pre>\n`;
+      }
+      continue;
+    }
+    if (inCode) {
+      html += escapeHtml(line) + "\n";
+      continue;
+    }
+
+    // headings
+    const h = line.match(/^(#{1,6})\s+(.*)$/);
+    if (h) {
+      closeLists();
+      const lvl = h[1].length;
+      html += `<h${lvl}>${inlineMd(h[2])}</h${lvl}>\n`;
+      continue;
+    }
+
+    // ordered list "1. item"
+    const ol = line.match(/^\s*\d+\.\s+(.*)$/);
+    if (ol) {
+      if (inUl) { html += "</ul>\n"; inUl = false; }
+      if (!inOl) { html += "<ol>\n"; inOl = true; }
+      html += `<li>${inlineMd(ol[1])}</li>\n`;
+      continue;
+    }
+
+    // unordered list "- item"
+    const ul = line.match(/^\s*-\s+(.*)$/);
+    if (ul) {
+      if (inOl) { html += "</ol>\n"; inOl = false; }
+      if (!inUl) { html += "<ul>\n"; inUl = true; }
+      html += `<li>${inlineMd(ul[1])}</li>\n`;
+      continue;
+    }
+
+    // blank line
+    if (line.trim() === "") {
+      closeLists();
+      html += "\n";
+      continue;
+    }
+
+    // paragraph
+    closeLists();
+    html += `<p>${inlineMd(line)}</p>\n`;
+  }
+
+  // cleanup
+  if (inCode) html += `</code></pre>\n`;
+  if (inUl) html += "</ul>\n";
+  if (inOl) html += "</ol>\n";
+
+  return html.trim();
 }
 
-function tagsSlugFromTags(tags = []) {
-  return (tags || [])
+function inlineMd(text) {
+  let s = escapeHtml(text);
+
+  // bold **text**
+  s = s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  // italic *text*
+  s = s.replace(/\*(.+?)\*/g, "<em>$1</em>");
+  // inline code `code`
+  s = s.replace(/`(.+?)`/g, "<code>$1</code>");
+  // link [text](url)
+  s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, `<a href="$2">$1</a>`);
+
+  return s;
+}
+
+function slugFromFilename(filename) {
+  return filename.replace(/\.md$/i, "").trim();
+}
+
+function listMarkdownPosts(dir) {
+  if (!fs.existsSync(dir)) return [];
+  return fs
+    .readdirSync(dir)
+    .filter((f) => f.toLowerCase().endsWith(".md"))
+    .map((f) => path.join(dir, f));
+}
+
+function normalizeTags(tags) {
+  if (Array.isArray(tags)) return tags.filter(Boolean).map(String);
+  if (typeof tags === "string" && tags.trim()) {
+    // allow "IT, Komputer"
+    return tags.split(",").map((t) => t.trim()).filter(Boolean);
+  }
+  return [];
+}
+
+function tagsSlugFromTags(tags) {
+  // your filter buttons use: it, system, web, docs
+  // We'll make a single string for data-tags attribute: "it system"
+  return tags
     .map((t) => String(t).toLowerCase().trim())
     .filter(Boolean)
     .join(" ");
 }
 
-function replaceAll(template, map) {
-  let out = template;
-  for (const [key, value] of Object.entries(map)) {
-    out = out.split(`{{${key}}}`).join(value ?? "");
+function replaceBetweenMarkers(html, startMarker, endMarker, newBlock) {
+  const startIdx = html.indexOf(startMarker);
+  const endIdx = html.indexOf(endMarker);
+  if (startIdx === -1 || endIdx === -1 || endIdx < startIdx) {
+    throw new Error(`Markers not found: ${startMarker} / ${endMarker}`);
   }
-  return out;
+  const before = html.slice(0, startIdx + startMarker.length);
+  const after = html.slice(endIdx);
+  return `${before}\n${newBlock}\n${after}`;
 }
 
-function renderBlogListItem(post) {
-  const href = `/id/blog/${escapeHtml(post.slug)}.html`;
+function renderBlogListItem(post, lang) {
+  const href = `/${lang}/blog/${escapeHtml(post.slug)}.html`;
   const tagText = escapeHtml((post.tags || []).join(" • ") || "Blog");
-  const title = escapeHtml(post.title || post.slug);
   const excerpt = escapeHtml(post.excerpt || post.description || "");
   const dateLabel = escapeHtml(post.dateLabel || post.year || "");
   const read = escapeHtml(post.readingTime || "—");
-
-  const tagsSlug = escapeHtml(post.tagsSlug || tagsSlugFromTags(post.tags));
+  const dataTags = escapeHtml(post.tagsSlug || "");
 
   return `
-<a class="blog-item" href="${href}" data-tags="${tagsSlug}">
+<a class="blog-item" href="${href}" data-tags="${dataTags}">
   <div class="blog-left">
     <p class="blog-tag">${tagText}</p>
-    <h2 class="blog-title">${title}</h2>
+    <h2 class="blog-title">${escapeHtml(post.title || post.slug)}</h2>
     <p class="blog-excerpt">${excerpt}</p>
   </div>
   <div class="blog-right">
@@ -90,331 +267,151 @@ function renderBlogListItem(post) {
 </a>`.trim();
 }
 
-function updateBlogIndex(posts) {
-  if (!fs.existsSync(blogIndexPath)) {
-    console.warn("⚠️ Skipped index update: id/blog/index.html not found.");
-    return;
-  }
+function buildPostHtml(template, post, lang) {
+  const siteUrl = ""; // optional (not required for local)
+  const canonical = `${siteUrl}/${lang}/blog/${post.slug}.html`.replace(/\/{2,}/g, "/");
+  const altEn = `${siteUrl}/en/blog/${post.slug}.html`.replace(/\/{2,}/g, "/");
 
-  const html = fs.readFileSync(blogIndexPath, "utf8");
+  const coverBlock = post.coverImage
+    ? `<div class="post-cover"><img src="${escapeHtml(post.coverImage)}" alt="Cover artikel" loading="lazy" /></div>`
+    : "";
 
-  const start = "<!-- POSTS:START -->";
-  const end = "<!-- POSTS:END -->";
+  const contentHtml = post.contentHtml || `<p class="lead">(Tulis konten di sini)</p>`;
+  const tagsText = escapeHtml((post.tags || []).join(" • ") || "Blog");
 
-  const startIdx = html.indexOf(start);
-  const endIdx = html.indexOf(end);
+  // IMPORTANT: your template uses {{PLACEHOLDER}}
+  const map = {
+    SLUG: escapeHtml(post.slug),
+    TITLE: escapeHtml(post.title || post.slug),
+    DESCRIPTION: escapeHtml(post.description || post.excerpt || ""),
+    YEAR: escapeHtml(post.year || ""),
+    READING_TIME: escapeHtml(post.readingTime || "—"),
+    AUTHOR: escapeHtml(post.author || "gojimms"),
+    TAGS_TEXT: tagsText,
+    CANONICAL_URL: escapeHtml(canonical),
+    ALT_EN_URL: escapeHtml(altEn),
+    OG_IMAGE: escapeHtml(post.ogImage || post.coverImage || "/assets/images/og/default.jpg"),
+    DATE_PUBLISHED: escapeHtml(post.datePublished || ""),
+    CONTENT_HTML: contentHtml,
+    COVER_BLOCK: coverBlock,
+    TOC_BLOCK: "", // keep empty if you don't generate TOC
+    PREV_BLOCK: "",
+    NEXT_BLOCK: "",
+    NEXT_URL: "",
+    NEXT_LABEL: "",
+  };
 
-  if (startIdx === -1 || endIdx === -1 || endIdx < startIdx) {
-    console.warn("⚠️ Skipped index update: markers not found. Add <!-- POSTS:START --> and <!-- POSTS:END -->.");
-    return;
-  }
+  return template.replace(/\{\{([A-Z0-9_]+)\}\}/g, (_, key) => (map[key] ?? ""));
+}
 
-  // sort posts newest first (by year/dateLabel fallback)
-  const sorted = [...posts].sort((a, b) => {
-    const ay = parseInt(a.year || "0", 10);
-    const by = parseInt(b.year || "0", 10);
-    return by - ay;
+function postFromMarkdownFile(filePath, lang) {
+  const slug = slugFromFilename(path.basename(filePath));
+  const raw = fs.readFileSync(filePath, "utf8");
+  const { data, body } = parseFrontmatter(raw);
+
+  const title = data.title || slug;
+  const description = data.description || data.excerpt || "";
+  const dateStr = data.date || data.datePublished || "";
+  const year = (dateStr && String(dateStr).slice(0, 4)) || "";
+  const tags = normalizeTags(data.tags);
+  const coverImage = data.coverImage || data.cover || data.image || "";
+
+  const contentHtml = mdToHtml(body);
+  const excerpt = description || stripHtml(contentHtml).slice(0, 140);
+
+  return {
+    lang,
+    slug,
+    title,
+    description,
+    excerpt,
+    datePublished: dateStr,
+    year,
+    dateLabel: year || "",
+    readingTime: data.readingTime || data.readTime || "—",
+    tags,
+    tagsSlug: tagsSlugFromTags(tags),
+    coverImage,
+    ogImage: data.ogImage || "",
+    author: data.author || "Jimmy Suseno",
+    contentHtml,
+  };
+}
+
+function stripHtml(html) {
+  return String(html).replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function sortNewest(posts) {
+  // Prefer datePublished, fallback year
+  return [...posts].sort((a, b) => {
+    const da = a.datePublished ? Date.parse(a.datePublished) : 0;
+    const db = b.datePublished ? Date.parse(b.datePublished) : 0;
+    if (db !== da) return db - da;
+    const ya = parseInt(a.year || "0", 10);
+    const yb = parseInt(b.year || "0", 10);
+    return yb - ya;
   });
+}
 
-  const listHtml = sorted.map(renderBlogListItem).join("\n\n");
+function updateBlogIndex(indexPath, posts, lang) {
+  if (!fs.existsSync(indexPath)) {
+    console.warn(`⚠️ Skipped: ${lang} blog index not found: ${indexPath}`);
+    return;
+  }
+  const html = fs.readFileSync(indexPath, "utf8");
+  const startMarker = "<!-- POSTS:START -->";
+  const endMarker = "<!-- POSTS:END -->";
 
-  const before = html.slice(0, startIdx + start.length);
-  const after = html.slice(endIdx);
+  const items = sortNewest(posts).map((p) => renderBlogListItem(p, lang)).join("\n");
 
-  const updated = `${before}\n${listHtml}\n${after}`;
-  fs.writeFileSync(blogIndexPath, updated, "utf8");
-
-  console.log("✅ Updated: /id/blog/index.html (posts list)");
+  const updated = replaceBetweenMarkers(html, startMarker, endMarker, items);
+  fs.writeFileSync(indexPath, updated, "utf8");
+  console.log(`✅ Updated: /${lang}/blog/index.html (listing)`);
 }
 
 function main() {
-  const template = fs.readFileSync(templatePath, "utf8");
-  const data = JSON.parse(fs.readFileSync(dataPath, "utf8"));
-  const siteUrl = data.siteUrl || "";       // ✅ NEW
-  const author = data.author || "gojimms";
-  const posts = (data.posts || []).filter((p) => p.slug);
+  ensureDir(OUT_ID_DIR);
+  ensureDir(OUT_EN_DIR);
 
-  ensureDir(outDir);
-  ensureDir(outDirEn);
+  const template = readFileSafe(TEMPLATE_PATH);
+  if (!template) {
+    throw new Error(`Template not found: ${TEMPLATE_PATH}`);
+  }
 
-  // Generate post pages
-  posts.forEach((p) => {
-    const slug = p.slug;
-    const outFile = path.join(outDir, `${slug}.html`);
+  // Load posts from markdown
+  const idFiles = listMarkdownPosts(POSTS_ID_DIR);
+  const enFiles = listMarkdownPosts(POSTS_EN_DIR);
 
-    const html = replaceAll(template, {
-      SLUG: escapeHtml(slug),
-      TITLE: escapeHtml(p.title || slug),
-      DESCRIPTION: escapeHtml(p.description || ""),
-      YEAR: escapeHtml(p.year || ""),
-      READING_TIME: escapeHtml(p.readingTime || "—"),
-      
-      CANONICAL_URL: `${siteUrl}/id/blog/${slug}.html`,
-      ALT_EN_URL: `${siteUrl}/en/blog/${slug}.html`,
-      OG_IMAGE: `${siteUrl}${ogImage(p)}`,
-      DATE_PUBLISHED: p.datePublished || `${p.year}-01-01`,
-      
-      AUTHOR: escapeHtml(author),
-      TAGS_TEXT: escapeHtml(tagsText(p.tags)),
-      TOC_BLOCK: renderTOC(p.toc),
-      COVER_BLOCK: renderCover(p.coverImage),
-      CONTENT_HTML: p.contentHtml || "<p class=\"lead\">(Tulis konten di sini)</p>",
-      NEXT_URL: escapeHtml(p.nextUrl || "/id/blog/"),
-      NEXT_LABEL: escapeHtml(p.nextLabel || "Next →")
-    });
+  const idPosts = idFiles.map((f) => postFromMarkdownFile(f, "id"));
+  const enPosts = enFiles.map((f) => postFromMarkdownFile(f, "en"));
 
-    fs.writeFileSync(outFile, html, "utf8");
-    console.log(`✅ Generated: /id/blog/${slug}.html`);
+  // Generate post pages (ID)
+  idPosts.forEach((p) => {
+    const out = path.join(OUT_ID_DIR, `${p.slug}.html`);
+    const html = buildPostHtml(template, p, "id");
+    fs.writeFileSync(out, html, "utf8");
+    console.log(`✅ Generated: /id/blog/${p.slug}.html`);
   });
 
-  // Update listing
-  updateBlogIndex(posts);
-
-  // Generate EN posts
-   posts.forEach((p) => {
-    const outFileEn = path.join(outDirEn, `${p.slug}.html`);
-    const htmlEn = renderEnPostHtml(siteUrl, author, p);
-    fs.writeFileSync(outFileEn, htmlEn, "utf8");
+  // Generate post pages (EN)
+  enPosts.forEach((p) => {
+    const out = path.join(OUT_EN_DIR, `${p.slug}.html`);
+    const html = buildPostHtml(template, p, "en");
+    fs.writeFileSync(out, html, "utf8");
     console.log(`✅ Generated: /en/blog/${p.slug}.html`);
-});
+  });
 
-// Update EN blog listing
-updateBlogIndexEn(posts);
+  // Update blog listings
+  updateBlogIndex(BLOG_INDEX_ID, idPosts, "id");
+  updateBlogIndex(BLOG_INDEX_EN, enPosts, "en");
 
-
-  // Generate sitemap
-  generateSitemap(siteUrl, posts);
-
-  // Panggil RSS
-  generateRSS(siteUrl, data, posts);
-
-  console.log("\nDone.");
+  console.log("\nDone.\n");
 }
 
-function generateSitemap(siteUrl, posts) {
-  const base = (siteUrl || "").replace(/\/+$/, ""); // hapus trailing slash
-  if (!base) {
-    console.warn("⚠️ Skipped sitemap: siteUrl is empty. Add siteUrl in data/posts.json");
-    return;
-  }
-
-  // pages statis utama
-  const staticPages = [
-    "/",
-    "/id/",
-    "/id/about.html",
-    "/id/portfolio.html",
-    "/id/contact.html",
-    "/id/blog/",
-    "/en/" // optional; kalau belum ada tetap aman
-  ];
-
-  // pages blog posts
-  const postPages = posts.map((p) => `/id/blog/${p.slug}.html`);
-
-  // gabung + unik
-  const urls = Array.from(new Set([...staticPages, ...postPages]));
-
-  // sitemap.xml content
-  const xml =
-    `<?xml version="1.0" encoding="UTF-8"?>\n` +
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-    urls
-      .map((u) => {
-        const loc = `${base}${u}`;
-        return `  <url>\n    <loc>${loc}</loc>\n  </url>`;
-      })
-      .join("\n") +
-    `\n</urlset>\n`;
-
-  const outPath = path.join(ROOT, "sitemap.xml");
-  fs.writeFileSync(outPath, xml, "utf8");
-  console.log("✅ Generated: /sitemap.xml");
+try {
+  main();
+} catch (e) {
+  console.error("❌ Blog generator failed:", e.message);
+  process.exit(1);
 }
-
-function generateRSS(siteUrl, meta, posts) {
-  const base = (siteUrl || "").replace(/\/+$/, "");
-  if (!base) {
-    console.warn("⚠️ Skipped RSS: siteUrl is empty.");
-    return;
-  }
-
-  const escape = (str = "") =>
-    str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-  const items = posts
-    .map((p) => {
-      const link = `${base}/id/blog/${p.slug}.html`;
-      return `
-    <item>
-      <title>${escape(p.title)}</title>
-      <link>${link}</link>
-      <guid>${link}</guid>
-      <description><![CDATA[${p.excerpt || p.description || ""}]]></description>
-    </item>`;
-    })
-    .join("");
-
-  const rss = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
-  <channel>
-    <title>${escape(meta.siteTitle)}</title>
-    <link>${base}</link>
-    <description>${escape(meta.siteDescription)}</description>
-    <language>id</language>
-    <generator>gojimms static generator</generator>
-    ${items}
-  </channel>
-</rss>`;
-
-  const outPath = path.join(ROOT, "rss.xml");
-  fs.writeFileSync(outPath, rss, "utf8");
-  console.log("✅ Generated: /rss.xml");
-}
-
-function ogImage(post) {
-  return post.ogImage || "/assets/images/og/default.jpg";
-}
-
-function hasEnglish(post) {
-  return Boolean((post.titleEn && post.titleEn.trim()) || (post.contentHtmlEn && post.contentHtmlEn.trim()));
-}
-
-function enFallbackContent(slug) {
-  const idUrl = `/id/blog/${slug}.html`;
-  return `
-<p class="lead">This English post is coming soon.</p>
-<p style="color:var(--muted);line-height:1.7;">
-  Meanwhile, you can read the Indonesian version here:
-  <a class="text-link" href="${idUrl}">${idUrl}</a>
-</p>
-`;
-}
-
-function renderEnPostHtml(siteUrl, author, post) {
-  const slug = post.slug;
-  const title = post.titleEn?.trim() || post.title || slug;
-  const desc = post.descriptionEn?.trim() || post.description || "";
-  const excerpt = post.excerptEn?.trim() || post.excerpt || desc;
-
-  const content = (post.contentHtmlEn && post.contentHtmlEn.trim())
-    ? post.contentHtmlEn
-    : enFallbackContent(slug);
-
-  const canonical = `${siteUrl.replace(/\/+$/, "")}/en/blog/${slug}.html`;
-  const og = `${siteUrl.replace(/\/+$/, "")}${post.ogImage || "/assets/images/og/default.jpg"}`;
-
-  return `<!DOCTYPE html>
-<html lang="en" data-theme="light">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>${escapeHtml(title)} — gojimms</title>
-  <meta name="description" content="${escapeHtml(desc)}" />
-
-  <link rel="stylesheet" href="/assets/css/theme.css" />
-  <link rel="stylesheet" href="/assets/css/style.css" />
-  <link rel="stylesheet" href="/assets/css/animation.css" />
-
-  <link rel="canonical" href="${canonical}" />
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="${escapeHtml(title)}" />
-  <meta property="og:description" content="${escapeHtml(desc)}" />
-  <meta property="og:url" content="${canonical}" />
-  <meta property="og:image" content="${og}" />
-</head>
-
-<body>
-  <main id="main-content">
-    <section class="section">
-      <div class="container post-header">
-        <a href="/en/blog/" class="text-link">← Back to Blog (EN)</a>
-
-        <p class="post-kicker">${escapeHtml((post.tags || []).join(" • ") || "Blog")}</p>
-        <h1 class="post-title">${escapeHtml(title)}</h1>
-
-        <div class="post-meta">
-          <span class="pill">${escapeHtml(post.year || "")}</span>
-          <span class="pill">${escapeHtml(post.readingTime || "—")}</span>
-          <span class="pill">by ${escapeHtml(author)}</span>
-        </div>
-
-        <p style="margin-top:10px;color:var(--muted);">
-          Indonesian version:
-          <a class="text-link" href="/id/blog/${escapeHtml(slug)}.html">/id/blog/${escapeHtml(slug)}.html</a>
-        </p>
-      </div>
-    </section>
-
-    <section class="section section-soft">
-      <div class="container post-grid">
-        <article class="post-content" style="grid-column: 1 / -1;">
-          ${content}
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <script src="/assets/js/darkmode.js" defer></script>
-  <script src="/assets/js/nav.js" defer></script>
-  <script src="/assets/js/page-transition.js" defer></script>
-</body>
-</html>`;
-}
-
-function updateBlogIndexEn(posts) {
-  if (!fs.existsSync(blogIndexEnPath)) {
-    console.warn("⚠️ Skipped EN index update: en/blog/index.html not found.");
-    return;
-  }
-
-  const html = fs.readFileSync(blogIndexEnPath, "utf8");
-  const start = "<!-- POSTS:START -->";
-  const end = "<!-- POSTS:END -->";
-
-  const startIdx = html.indexOf(start);
-  const endIdx = html.indexOf(end);
-
-  if (startIdx === -1 || endIdx === -1 || endIdx < startIdx) {
-    console.warn("⚠️ Skipped EN index update: markers not found.");
-    return;
-  }
-
-  const listHtml = posts.map((p) => {
-    const enUrl = `/en/blog/${escapeHtml(p.slug)}.html`;
-    const idUrl = `/id/blog/${escapeHtml(p.slug)}.html`;
-    const title = escapeHtml(p.titleEn?.trim() || p.title || p.slug);
-    const excerpt = escapeHtml(p.excerptEn?.trim() || p.excerpt || p.description || "");
-    const dateLabel = escapeHtml(p.dateLabel || p.year || "");
-    const read = escapeHtml(p.readingTime || "—");
-    const tagText = escapeHtml((p.tags || []).join(" • ") || "Blog");
-
-    const note = hasEnglish(p)
-      ? ""
-      : `<p class="blog-excerpt" style="margin-top:8px;">EN coming soon — <span style="color:var(--muted);">read ID</span>: <a class="text-link" href="${idUrl}">${idUrl}</a></p>`;
-
-    return `
-<a class="blog-item" href="${enUrl}" data-tags="${escapeHtml((p.tagsSlug || "").toLowerCase())}">
-  <div class="blog-left">
-    <p class="blog-tag">${tagText}</p>
-    <h2 class="blog-title">${title}</h2>
-    <p class="blog-excerpt">${excerpt}</p>
-    ${note}
-  </div>
-  <div class="blog-right">
-    <span class="blog-date">${dateLabel}</span>
-    <span class="blog-read">${read}</span>
-    <span class="work-arrow" aria-hidden="true">→</span>
-  </div>
-</a>`.trim();
-  }).join("\n\n");
-
-  const before = html.slice(0, startIdx + start.length);
-  const after = html.slice(endIdx);
-  const updated = `${before}\n${listHtml}\n${after}`;
-  fs.writeFileSync(blogIndexEnPath, updated, "utf8");
-  console.log("✅ Updated: /en/blog/index.html (posts list)");
-}
-
-main();
