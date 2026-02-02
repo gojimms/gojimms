@@ -21,40 +21,81 @@
   <meta name="twitter:description" content="Checklist praktis migrasi aplikasi: sebelum, saat, dan setelah go-live. Ringkas, jelas, dan bisa dipakai tim." />
   <meta name="twitter:image" content="https://gojimms.com/assets/images/og/default.jpg" />
 
+  <link rel="canonical" href="https://gojimms.com/id/blog/post-1.html" />
+  <link rel="alternate" hreflang="id" href="https://gojimms.com/id/blog/post-1.html" />
+  <link rel="alternate" hreflang="en" href="https://gojimms.com/en/blog/post-1.html" />
+
   <link rel="stylesheet" href="/assets/css/theme.css" />
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="stylesheet" href="/assets/css/animation.css" />
 
-  <link rel="canonical" href="https://gojimms.com/id/blog/post-1.html" />
-
-  <link rel="alternate" hreflang="id" href="https://gojimms.com/id/blog/post-1.html" />
-  <link rel="alternate" hreflang="en" href="https://gojimms.com/en/blog/post-1.html" />
-
+  <!-- Structured Data -->
   <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Checklist migrasi aplikasi: biar nggak panik saat go-live",
-  "description": "Checklist praktis migrasi aplikasi: sebelum, saat, dan setelah go-live. Ringkas, jelas, dan bisa dipakai tim.",
-  "author": {
-    "@type": "Person",
-    "name": "Jimmy Suseno"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "gojimms"
-  },
-  "datePublished": "2026-01-01",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://gojimms.com/id/blog/post-1.html"
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Checklist migrasi aplikasi: biar nggak panik saat go-live",
+    "description": "Checklist praktis migrasi aplikasi: sebelum, saat, dan setelah go-live. Ringkas, jelas, dan bisa dipakai tim.",
+    "author": { "@type": "Person", "name": "Jimmy Suseno" },
+    "publisher": { "@type": "Organization", "name": "gojimms" },
+    "datePublished": "2026-01-01",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://gojimms.com/id/blog/post-1.html" }
   }
-}
-</script>
-
+  </script>
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <nav class="navbar container">
+      <div class="brand">
+        <a href="/id/">gojimms</a>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="/id/">Home</a></li>
+        <li><a href="/id/about.html">About</a></li>
+        <li><a href="/id/portfolio.html">Portfolio</a></li>
+        <li><a href="/id/blog/" class="is-active">Blog</a></li>
+        <li><a href="/id/contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="/en/blog/post-1.html" class="lang-switch">EN</a>
+        <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Open menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+      </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <div class="mobile-menu-inner container">
+        <div class="mobile-menu-top">
+          <p class="mobile-menu-title">Menu</p>
+          <button class="menu-close" id="menuClose">×</button>
+        </div>
+
+        <ul class="mobile-links">
+          <li><a href="/id/">Home</a></li>
+          <li><a href="/id/about.html">About</a></li>
+          <li><a href="/id/portfolio.html">Portfolio</a></li>
+          <li><a href="/id/blog/">Blog</a></li>
+          <li><a href="/id/contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
   <main id="main-content">
     <section class="section">
       <div class="container post-header">
@@ -88,13 +129,40 @@
           <nav class="post-nav">
             <a href="/id/blog/" class="post-nav-item">← Semua Artikel</a>
             <div class="post-nav-sides">
-              {{PREV_BLOCK}}
-              {{NEXT_BLOCK}}
+              
+              
             </div>
           </nav>
         </article>
       </div>
     </section>
   </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-left">© <span id="year"></span> gojimms</p>
+      <div class="footer-right">
+        <a href="#" class="footer-link">LinkedIn</a>
+        <a href="#" class="footer-link">GitHub</a>
+        <a href="/id/contact.html" class="footer-link">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scrollTopBtn" class="scroll-top">↑</button>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <!-- Scripts (biar dark mode & menu jalan) -->
+  <script src="/assets/js/darkmode.js" defer></script>
+  <script src="/assets/js/nav.js" defer></script>
+  <script src="/assets/js/active-nav.js" defer></script>
+  <script src="/assets/js/motion.js" defer></script>
+  <script src="/assets/js/scroll-top.js" defer></script>
+  <script src="/assets/js/scroll-progress.js" defer></script>
+  <script src="/assets/js/page-transition.js" defer></script>
 </body>
 </html>

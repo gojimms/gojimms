@@ -3,28 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Checklist migrasi aplikasi: biar nggak panik saat go-live — gojimms</title>
   <meta name="description" content="Checklist praktis migrasi aplikasi: sebelum, saat, dan setelah go-live. Ringkas, jelas, dan bisa dipakai tim." />
+  <link rel="canonical" href="https://gojimms.com/en/blog/post-1.html" />
 
   <link rel="stylesheet" href="/assets/css/theme.css" />
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="stylesheet" href="/assets/css/animation.css" />
-
-  <link rel="canonical" href="https://gojimms.com/en/blog/post-1.html" />
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="Checklist migrasi aplikasi: biar nggak panik saat go-live" />
-  <meta property="og:description" content="Checklist praktis migrasi aplikasi: sebelum, saat, dan setelah go-live. Ringkas, jelas, dan bisa dipakai tim." />
-  <meta property="og:url" content="https://gojimms.com/en/blog/post-1.html" />
-  <meta property="og:image" content="https://gojimms.com/assets/images/og/default.jpg" />
 </head>
-
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="navbar container">
+      <div class="brand"><a href="/en/">gojimms</a></div>
+      <ul class="nav-links">
+        <li><a href="/en/">Home</a></li>
+        <li><a href="/en/about.html">About</a></li>
+        <li><a href="/en/portfolio.html">Portfolio</a></li>
+        <li><a href="/en/blog/" class="is-active">Blog</a></li>
+        <li><a href="/en/contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="/id/blog/post-1.html" class="lang-switch">ID</a>
+        <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">☰</button>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <div class="mobile-menu-inner container">
+        <div class="mobile-menu-top">
+          <p class="mobile-menu-title">Menu</p>
+          <button class="menu-close" id="menuClose">×</button>
+        </div>
+        <ul class="mobile-links">
+          <li><a href="/en/">Home</a></li>
+          <li><a href="/en/about.html">About</a></li>
+          <li><a href="/en/portfolio.html">Portfolio</a></li>
+          <li><a href="/en/blog/">Blog</a></li>
+          <li><a href="/en/contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
   <main id="main-content">
     <section class="section">
       <div class="container post-header">
-        <a href="/en/blog/" class="text-link">← Back to Blog (EN)</a>
-
+        <a href="/en/blog/" class="text-link">← Back to Blog</a>
         <p class="post-kicker">IT • System</p>
         <h1 class="post-title">Checklist migrasi aplikasi: biar nggak panik saat go-live</h1>
 
@@ -34,30 +60,49 @@
           <span class="pill">by Jimmy Suseno</span>
         </div>
 
-        <p style="margin-top:10px;color:var(--muted);">
-          Indonesian version:
-          <a class="text-link" href="/id/blog/post-1.html">/id/blog/post-1.html</a>
-        </p>
+        
       </div>
     </section>
 
     <section class="section section-soft">
       <div class="container post-grid">
-        <article class="post-content" style="grid-column: 1 / -1;">
-          
-<p class="lead">This English post is coming soon.</p>
-<p style="color:var(--muted);line-height:1.7;">
-  Meanwhile, you can read the Indonesian version here:
-  <a class="text-link" href="/id/blog/post-1.html">/id/blog/post-1.html</a>
-</p>
+        <aside class="post-toc">
+          <div class="toc-card">
+            <p class="toc-title">Table of Contents</p>
+            <ol class="toc-list"><li><a href="#ringkas">Versi ringkas</a></li><li><a href="#sebelum">Sebelum migrasi</a></li><li><a href="#saat">Saat migrasi</a></li><li><a href="#setelah">Setelah migrasi</a></li><li><a href="#penutup">Penutup</a></li></ol>
+          </div>
+        </aside>
 
+        <article class="post-content">
+          <p class="lead">English version is coming soon.</p><p>Read Indonesian version: <a class="text-link" href="https://gojimms.com/id/blog/post-1.html">https://gojimms.com/id/blog/post-1.html</a></p>
         </article>
       </div>
     </section>
   </main>
 
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-left">© <span id="year"></span> gojimms</p>
+      <div class="footer-right">
+        <a href="#" class="footer-link">LinkedIn</a>
+        <a href="#" class="footer-link">GitHub</a>
+        <a href="/en/contact.html" class="footer-link">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scrollTopBtn" class="scroll-top">↑</button>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
   <script src="/assets/js/darkmode.js" defer></script>
   <script src="/assets/js/nav.js" defer></script>
+  <script src="/assets/js/active-nav.js" defer></script>
+  <script src="/assets/js/motion.js" defer></script>
+  <script src="/assets/js/scroll-top.js" defer></script>
+  <script src="/assets/js/scroll-progress.js" defer></script>
   <script src="/assets/js/page-transition.js" defer></script>
 </body>
 </html>
