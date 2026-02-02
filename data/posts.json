@@ -40,6 +40,25 @@
         { "id": "struktur", "label": "Struktur" }
       ],
       "contentHtml": "<p class=\"lead\" id=\"intro\">Ini post kedua.</p><h2 id=\"struktur\">Struktur</h2><p>Isi...</p>"
+    },
+    {
+      "slug": "apa-itu-komputer-dan-mengapa-penting-dalam-kehidupan-sehari-hari",
+      "title": "Apa Itu Komputer dan Mengapa Penting dalam Kehidupan Sehari-hari?",
+      "description": "Artikel ini membahas pengertian komputer, fungsi utamanya, serta peran penting komputer dalam menunjang aktivitas belajar, kerja, dan kehidupan sehari-hari di era digital.",
+      "excerpt": "Komputer sudah jadi bagian hidup sehari-hari. Tapi sebenarnya apa itu komputer dan kenapa penting?",
+      "dateLabel": "2026",
+      "year": "2026",
+      "readingTime": "5 min read",
+      "tags": ["IT", "Komputer", "Teknologi", "Informasi"],
+      "tagsSlug": "it komputer teknologi informasi",
+      "coverImage": "/assets/images/blog/cover-komputer.jpg",
+      "toc": [
+       { "id": "pengertian-komputer", "label": "Pengertian Komputer" },
+       { "id": "fungsi-utama", "label": "Fungsi Utama Komputer" },
+       { "id": "contoh-penggunaan", "label": "Contoh Penggunaan" },
+       { "id": "kesimpulan", "label": "Kesimpulan" }
+      ],
+      "contentHtml": "<p class=\"lead\">Di era digital seperti sekarang, komputer telah menjadi bagian yang tidak terpisahkan dari kehidupan manusia...</p><h2 id=\"pengertian-komputer\">Pengertian Komputer</h2><p>Komputer adalah perangkat elektronik yang berfungsi untuk menerima data (input), mengolah data (process), dan menghasilkan informasi (output).</p><h2 id=\"fungsi-utama\">Fungsi Utama Komputer</h2><ul><li>Memproses data dengan cepat</li><li>Menyimpan data</li><li>Membantu komunikasi dan kolaborasi</li></ul><h2 id=\"contoh-penggunaan\">Contoh Penggunaan</h2><p>Mulai dari belajar, kerja, transaksi, sampai hiburan—semua melibatkan komputer.</p><h2 id=\"kesimpulan\">Kesimpulan</h2><p>Komputer itu penting karena membantu manusia bekerja lebih cepat, akurat, dan terhubung.</p>"
     }
   ]
 }
