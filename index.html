@@ -117,10 +117,11 @@
     <div class="brand">gojimms</div>
     <div class="badge">🚧 Maintenance Mode</div>
 
-    <h1>Sedang Dalam Proses Pembaruan</h1>
+    <h2>We’re Updating Things</h2>
     <p>
-      Kami sedang melakukan konfigurasi DNS/HTTPS dan penyempurnaan layanan.
-      <br/>Silakan kembali dalam beberapa saat lagi.
+      We’re currently configuring DNS & HTTPS and improving our services.
+      <br/>Please check back again shortly.
+      </p>
     </p>
 
     <section class="timer" aria-label="Countdown">
@@ -143,13 +144,7 @@
     </section>
 
     <div class="status" id="status">
-      Estimasi selesai: <strong>sekitar 2 jam</strong> (auto countdown).
-    </div>
-
-    <div class="links">
-      <!-- ganti link ini kalau mau -->
-      <a class="btn" href="https://gojimms.netlify.app" rel="noopener">Buka versi Netlify</a>
-      <a class="btn" href="/id/" aria-label="Coba buka versi Indonesian">Coba buka /id</a>
+      Estimated completion: <strong>~5 hours</strong> (auto countdown).
     </div>
 
     <div class="footer">
@@ -160,9 +155,9 @@
 
   <script>
     // === Countdown Mode ===
-    // Default: 2 jam dari waktu user membuka halaman.
+    // Default: 5 jam dari waktu user membuka halaman.
     // Kalau mau fixed waktu WIB, bilang targetnya (tanggal + jam).
-    const HOURS_FROM_NOW = 2;
+    const HOURS_FROM_NOW = 5;
 
     const target = new Date(Date.now() + HOURS_FROM_NOW * 60 * 60 * 1000).getTime();
 
