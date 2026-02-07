@@ -17,3 +17,33 @@ body {
   color: var(--text);
   font-family: Inter, system-ui, sans-serif;
 }
+
+.theme-toggle{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background: rgba(0,0,0,.04);
+  color: inherit;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition: transform .12s ease, border-color .12s ease, background .12s ease;
+}
+
+[data-theme="dark"] .theme-toggle{
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.10);
+}
+
+.theme-toggle:hover{
+  transform: translateY(-1px);
+  border-color: rgba(124,243,208,.35);
+  background: rgba(255,255,255,.06);
+}
+
+.theme-icon{
+  font-size:18px;
+  line-height:1;
+}

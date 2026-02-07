@@ -1,15 +1,36 @@
 <footer class="site-footer">
   <div class="container footer-inner">
     <p class="footer-left">© <span id="year"></span> gojimms</p>
+
     <div class="footer-right">
-      <a href="#" class="footer-link">LinkedIn</a>
-      <a href="#" class="footer-link">GitHub</a>
-      <a href="/id/contact.html" class="footer-link">Email</a>
+      <a href="https://www.linkedin.com/in/gojimms/" 
+         class="footer-link" 
+         target="_blank" 
+         rel="noopener">
+        LinkedIn
+      </a>
+
+      <a href="https://github.com/gojimms" 
+         class="footer-link" 
+         target="_blank" 
+         rel="noopener">
+        GitHub
+      </a>
+
+      <a href="mailto:hi@gojimms.com" 
+         class="footer-link">
+        Email
+      </a>
+
+      <a href="/privacy-policy.html"
+         class="footer-link">
+        Privacy-policy
+      </a>
+
     </div>
   </div>
 
   <script>
-    // Script kecil ini aman walau di footer
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </footer>
