@@ -1,20 +1,43 @@
 <!doctype html>
 <html>
-  <body style="font-family: Arial, sans-serif; line-height: 1.6;">
-    <h2>Reset password</h2>
-    <p>Klik tombol di bawah untuk reset password akun CMS gojimms.</p>
+  <head>
+    <meta charset="utf-8" />
+    <title>Reset Password - gojimms</title>
+  </head>
+  <body style="font-family: Arial, sans-serif; line-height: 1.6; color:#111;">
+    <div style="max-width:640px;margin:0 auto;padding:24px;">
+      <h2 style="margin:0 0 12px;">Reset Password</h2>
 
-    <p>
-      <a
-        href="https://www.gojimms.com/admin/#recovery_token={{ .Token }}"
-        style="display:inline-block;padding:10px 14px;background:#111;color:#fff;text-decoration:none;border-radius:8px;"
-      >
-        Reset password
-      </a>
-    </p>
+      <p style="margin:0 0 16px;">
+        Kamu menerima email ini karena ada permintaan reset password untuk akun CMS <b>gojimms</b>.
+      </p>
 
-    <p style="color:#666;font-size:12px;">
-      Jika kamu tidak merasa melakukan permintaan ini, abaikan email ini.
-    </p>
+      <p style="margin:0 0 18px;">
+        Klik tombol di bawah untuk melanjutkan:
+      </p>
+
+      <p style="margin:0 0 20px;">
+        <a
+          href="{{ .SiteURL }}/admin/#recovery_token={{ .Token }}"
+          style="display:inline-block;background:#111;color:#fff;padding:12px 16px;border-radius:10px;text-decoration:none;"
+        >
+          Reset password
+        </a>
+      </p>
+
+      <p style="margin:0 0 10px;color:#555;">
+        Kalau tombol tidak bisa diklik, copy link ini ke browser:
+      </p>
+
+      <p style="word-break:break-all;margin:0 0 18px;">
+        {{ .SiteURL }}/admin/#recovery_token={{ .Token }}
+      </p>
+
+      <hr style="border:none;border-top:1px solid #eee;margin:18px 0;" />
+
+      <p style="margin:0;color:#777;font-size:13px;">
+        Jika kamu tidak merasa meminta reset password, abaikan email ini.
+      </p>
+    </div>
   </body>
 </html>
