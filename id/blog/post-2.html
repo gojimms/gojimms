@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Dokumentasi teknis yang enak dibaca itu seperti apa? — gojimms</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+  <meta name="theme-color" content="#0e0e11">
+
+  <title>Dokumentasi teknis yang enak dibaca itu seperti apa? - gojimms</title>
   <meta name="description" content="Struktur dokumentasi teknis yang bikin tim cepat paham." />
 
   <!-- Open Graph -->
@@ -119,38 +123,157 @@
         <aside class="post-toc">
           <div class="toc-card">
             <p class="toc-title">Daftar Isi</p>
-            <ol class="toc-list"><li><a href="#intro">Intro</a></li><li><a href="#struktur">Struktur</a></li></ol>
+            <ol class="toc-list">
+  <li><a href="#intro">Pendahuluan</a></li>
+  <li><a href="#masalah">Masalah Umum</a></li>
+  <li><a href="#prinsip">Prinsip Dasar</a></li>
+  <li><a href="#struktur">Struktur Ideal</a></li>
+  <li><a href="#contoh">Contoh Praktis</a></li>
+  <li><a href="#penutup">Penutup</a></li>
+</ol>
+
           </div>
         </aside>
 
-        <article class="post-content">
-          <p class="lead" id="intro">Ini post kedua.</p><h2 id="struktur">Struktur</h2><p>Isi...</p>
+<article class="post-content">
 
-          <nav class="post-nav">
-            <a href="/id/blog/" class="post-nav-item">← Semua Artikel</a>
-            <div class="post-nav-sides">
-              
-              
-            </div>
-          </nav>
-        </article>
+  <p class="lead" id="intro">
+    Dokumentasi teknis sering dianggap sebagai pelengkap—ditulis belakangan,
+    dibaca seperlunya. Padahal di lapangan, dokumentasi justru menjadi penghubung
+    utama antara sistem, manusia, dan proses kerja.
+  </p>
+
+  <p>
+    Dokumentasi yang enak dibaca bukan berarti penuh ilustrasi atau bahasa santai,
+    tapi <strong>jelas, terstruktur, dan relevan dengan kebutuhan pembacanya</strong>.
+    Artikel ini membahas bagaimana menyusun dokumentasi teknis yang benar-benar
+    dipakai oleh tim, bukan sekadar disimpan di folder.
+  </p>
+
+  <h2 id="masalah">Masalah Umum Dokumentasi Teknis</h2>
+  <p>
+    Banyak dokumentasi gagal berfungsi karena ditulis dari sudut pandang sistem,
+    bukan manusia. Beberapa masalah yang sering ditemui di lapangan antara lain:
+  </p>
+
+  <ul>
+    <li>Terlalu teknis tanpa konteks penggunaan</li>
+    <li>Tidak jelas siapa target pembacanya</li>
+    <li>Tidak pernah diperbarui setelah sistem berubah</li>
+    <li>Struktur berantakan dan sulit dinavigasi</li>
+  </ul>
+
+  <p>
+    Akibatnya, saat terjadi insiden atau pergantian personel,
+    tim justru kembali mengandalkan chat pribadi dan ingatan masing-masing.
+  </p>
+
+  <h2 id="prinsip">Prinsip Dokumentasi yang Enak Dibaca</h2>
+  <p>
+    Dokumentasi teknis yang baik biasanya mengikuti beberapa prinsip dasar berikut:
+  </p>
+
+  <ol>
+    <li>
+      <strong>Berbasis peran</strong><br>
+      Admin, developer, dan user operasional memiliki kebutuhan yang berbeda.
+      Dokumentasi harus menyadari hal ini.
+    </li>
+    <li>
+      <strong>Berorientasi tugas</strong><br>
+      Fokus pada apa yang ingin dilakukan pembaca, bukan sekadar definisi teknis.
+    </li>
+    <li>
+      <strong>Ringkas tapi lengkap</strong><br>
+      Tidak bertele-tele, namun cukup untuk dieksekusi tanpa asumsi tambahan.
+    </li>
+  </ol>
+
+  <h2 id="struktur">Struktur Ideal Dokumentasi Teknis</h2>
+  <p>
+    Salah satu struktur yang terbukti efektif di banyak tim adalah sebagai berikut:
+  </p>
+
+  <h3>1. Gambaran Umum Sistem</h3>
+  <p>
+    Jelaskan fungsi utama sistem, konteks penggunaannya,
+    dan batasan yang perlu diketahui sejak awal.
+  </p>
+
+  <h3>2. Arsitektur Singkat</h3>
+  <p>
+    Tidak perlu terlalu detail, cukup komponen utama dan bagaimana mereka saling
+    terhubung. Diagram sederhana sering kali sangat membantu.
+  </p>
+
+  <h3>3. Alur Operasional</h3>
+  <p>
+    Bagian ini menjawab pertanyaan: <em>“Kalau sistem ini dipakai sehari-hari,
+    alurnya seperti apa?”</em>
+  </p>
+
+  <h3>4. Skenario Masalah & Solusi</h3>
+  <p>
+    Dokumentasi akan jauh lebih bernilai jika mencakup
+    kasus error umum, penyebab, dan langkah penanganannya.
+  </p>
+
+  <h2 id="contoh">Contoh Pendekatan Praktis</h2>
+  <p>
+    Daripada menulis:
+    <em>“Service berjalan di port 8080 menggunakan reverse proxy.”</em>
+  </p>
+
+  <p>
+    Lebih membantu jika ditulis:
+  </p>
+
+  <blockquote>
+    Service utama berjalan di port 8080 dan diakses melalui reverse proxy.
+    Jika service tidak bisa diakses dari browser, periksa status service
+    dan konfigurasi proxy terlebih dahulu.
+  </blockquote>
+
+  <p>
+    Perbedaannya sederhana, tapi dampaknya besar bagi tim operasional.
+  </p>
+
+  <h2 id="penutup">Penutup</h2>
+  <p>
+    Dokumentasi teknis bukan sekadar kewajiban proyek,
+    tapi aset jangka panjang sebuah sistem.
+    Dokumentasi yang enak dibaca akan:
+  </p>
+
+  <ul>
+    <li>Mempercepat onboarding anggota baru</li>
+    <li>Mengurangi ketergantungan pada individu tertentu</li>
+    <li>Membantu troubleshooting di situasi kritis</li>
+  </ul>
+
+  <p>
+    Jika dokumentasi bisa dipahami tanpa harus bertanya ke penulisnya,
+    berarti dokumentasi tersebut sudah berada di jalur yang benar.
+  </p>
+
+  <nav class="post-nav">
+    <a href="/id/blog/" class="post-nav-item">← Semua Artikel</a>
+    <div class="post-nav-sides"></div>
+  </nav>
+
+</article>
+
+
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p class="footer-left">© <span id="year"></span> gojimms</p>
-      <div class="footer-right">
-        <a href="#" class="footer-link">LinkedIn</a>
-        <a href="#" class="footer-link">GitHub</a>
-        <a href="/id/contact.html" class="footer-link">Email</a>
-      </div>
-    </div>
-  </footer>
+   <!-- Footer injected -->
+  <div data-include="/partials/footer.html"></div>
 
-  <button id="scrollTopBtn" class="scroll-top">↑</button>
+<button id="scrollTop" class="scroll-top" aria-label="Back to top">
+  ↑
+</button>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -164,5 +287,7 @@
   <script src="/assets/js/scroll-top.js" defer></script>
   <script src="/assets/js/scroll-progress.js" defer></script>
   <script src="/assets/js/page-transition.js" defer></script>
+  <script src="/assets/js/include.js"></script>
+
 </body>
 </html>

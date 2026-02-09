@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Checklist migrasi aplikasi: biar nggak panik saat go-live — gojimms</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+  <meta name="theme-color" content="#0e0e11">
+
+  <title>Checklist migrasi aplikasi: biar nggak panik saat go-live - gojimms</title>
   <meta name="description" content="Checklist praktis migrasi aplikasi: sebelum, saat, dan setelah go-live. Ringkas, jelas, dan bisa dipakai tim." />
 
   <!-- Open Graph -->
@@ -123,34 +127,142 @@
           </div>
         </aside>
 
-        <article class="post-content">
-          <p class="lead" id="ringkas">Tulis intro di sini...</p>
+<article class="post-content">
 
-          <nav class="post-nav">
-            <a href="/id/blog/" class="post-nav-item">← Semua Artikel</a>
-            <div class="post-nav-sides">
-              
-              
-            </div>
-          </nav>
-        </article>
+  <!-- INTRO / LEAD -->
+  <p class="lead" id="ringkas">
+    Migrasi aplikasi itu bukan sekadar “pindah server”. Di balik tombol <em>deploy</em> dan
+    momen <em>go-live</em>, ada banyak keputusan kecil yang kalau terlewat bisa bikin tim panik.
+    Checklist ini aku susun dari pengalaman lapangan—ringkas, realistis, dan bisa langsung
+    dipakai tim teknis maupun non-teknis.
+  </p>
+
+  <p>
+    Fokusnya sederhana: apa saja yang <strong>wajib dicek sebelum</strong>,
+    <strong>dikontrol saat</strong>, dan <strong>dipastikan setelah</strong> migrasi,
+    supaya sistem tetap stabil dan pengguna nggak kena dampaknya.
+  </p>
+
+  <!-- SEBELUM MIGRASI -->
+  <h2 id="sebelum">1. Sebelum migrasi: pastikan fondasinya siap</h2>
+
+  <p>
+    Fase ini sering disepelekan, padahal di sinilah sebagian besar masalah migrasi bisa dicegah.
+    Jangan buru-buru <em>go-live</em> kalau poin-poin dasar ini belum beres.
+  </p>
+
+  <ul>
+    <li>
+      <strong>Inventaris sistem</strong><br />
+      Catat semua komponen: aplikasi, database, API, cron job, service eksternal, dan dependensinya.
+      Jangan hanya mengandalkan ingatan.
+    </li>
+    <li>
+      <strong>Backup & rollback plan</strong><br />
+      Pastikan backup <em>fresh</em> dan sudah diuji restore-nya.
+      Rollback plan wajib ada, meskipun (semoga) tidak dipakai.
+    </li>
+    <li>
+      <strong>Environment parity</strong><br />
+      Versi OS, runtime, database, dan konfigurasi sebisa mungkin sama antara server lama dan baru.
+    </li>
+    <li>
+      <strong>DNS & TTL</strong><br />
+      Turunkan TTL DNS beberapa jam atau hari sebelumnya agar propagasi lebih cepat saat cut-over.
+    </li>
+    <li>
+      <strong>Komunikasi ke stakeholder</strong><br />
+      Tentukan jadwal migrasi, PIC, dan kanal komunikasi jika terjadi kendala.
+    </li>
+  </ul>
+
+  <!-- SAAT MIGRASI -->
+  <h2 id="saat">2. Saat migrasi: fokus, tenang, dan terkontrol</h2>
+
+  <p>
+    Ini fase paling sensitif. Target utamanya bukan cepat, tapi <strong>terkendali</strong>.
+    Kerjakan sesuai urutan, jangan lompat-lompat.
+  </p>
+
+  <ul>
+    <li>
+      <strong>Freeze perubahan</strong><br />
+      Hentikan sementara deploy, input data besar, atau perubahan konfigurasi lain
+      selama proses migrasi.
+    </li>
+    <li>
+      <strong>Monitoring real-time</strong><br />
+      Pantau CPU, RAM, disk, log aplikasi, dan error rate sejak aplikasi mulai diakses.
+    </li>
+    <li>
+      <strong>Cek fungsi kritikal</strong><br />
+      Login, transaksi utama, integrasi API, dan proses background harus dites manual.
+    </li>
+    <li>
+      <strong>Catat setiap anomali</strong><br />
+      Sekecil apa pun, catat. Ini akan sangat membantu saat evaluasi pasca migrasi.
+    </li>
+  </ul>
+
+  <!-- SETELAH MIGRASI -->
+  <h2 id="setelah">3. Setelah migrasi: stabilisasi & validasi</h2>
+
+  <p>
+    Migrasi belum selesai saat sistem bisa diakses. Justru fase setelahnya menentukan
+    apakah migrasi itu sukses atau hanya “terlihat sukses”.
+  </p>
+
+  <ul>
+    <li>
+      <strong>Monitoring lanjutan</strong><br />
+      Minimal 24-72 jam pertama adalah masa rawan. Jangan lepas pengawasan terlalu cepat.
+    </li>
+    <li>
+      <strong>Validasi data</strong><br />
+      Pastikan tidak ada data hilang, terduplikasi, atau tidak sinkron.
+    </li>
+    <li>
+      <strong>Update dokumentasi</strong><br />
+      Perbarui diagram, SOP, dan catatan teknis sesuai kondisi terbaru.
+    </li>
+    <li>
+      <strong>Feedback pengguna</strong><br />
+      Dengarkan laporan user-sering kali mereka menemukan masalah yang tidak muncul di monitoring.
+    </li>
+  </ul>
+
+  <!-- PENUTUP -->
+  <h2 id="penutup">Penutup</h2>
+
+  <p>
+    Migrasi aplikasi yang baik bukan soal heroik atau lembur semalam suntuk,
+    tapi soal <strong>kesiapan, disiplin, dan komunikasi</strong>.
+    Checklist ini bisa kamu jadikan baseline, lalu sesuaikan dengan kompleksitas sistemmu.
+  </p>
+
+  <p>
+    Kalau kamu sering terlibat di migrasi sistem-terutama di lingkungan produksi atau layanan publik-
+    dokumentasi dan proses yang rapi akan selalu jadi penyelamat.
+  </p>
+
+  <!-- NAV BAWAH -->
+  <nav class="post-nav">
+    <a href="/id/blog/" class="post-nav-item">← Semua Artikel</a>
+    <div class="post-nav-sides"></div>
+  </nav>
+
+</article>
+
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p class="footer-left">© <span id="year"></span> gojimms</p>
-      <div class="footer-right">
-        <a href="#" class="footer-link">LinkedIn</a>
-        <a href="#" class="footer-link">GitHub</a>
-        <a href="/id/contact.html" class="footer-link">Email</a>
-      </div>
-    </div>
-  </footer>
+   <!-- Footer injected -->
+  <div data-include="/partials/footer.html"></div>
 
-  <button id="scrollTopBtn" class="scroll-top">↑</button>
+<button id="scrollTop" class="scroll-top" aria-label="Back to top">
+  ↑
+</button>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -164,5 +276,7 @@
   <script src="/assets/js/scroll-top.js" defer></script>
   <script src="/assets/js/scroll-progress.js" defer></script>
   <script src="/assets/js/page-transition.js" defer></script>
+  <script src="/assets/js/include.js"></script>
+
 </body>
 </html>

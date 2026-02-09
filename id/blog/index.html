@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Blog — gojimms</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+  <meta name="theme-color" content="#0e0e11">
+
+  <title>Blog - gojimms</title>
   <meta name="description" content="Catatan IT, sistem, dan pembelajaran di lapangan dari gojimms." />
 
   <link rel="stylesheet" href="/assets/css/theme.css" />
@@ -159,18 +163,12 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p class="footer-left">© <span id="year"></span> gojimms</p>
-      <div class="footer-right">
-        <a href="#" class="footer-link">LinkedIn</a>
-        <a href="#" class="footer-link">GitHub</a>
-        <a href="/id/contact.html" class="footer-link">Email</a>
-      </div>
-    </div>
-  </footer>
+   <!-- Footer injected -->
+  <div data-include="/partials/footer.html"></div>
 
-  <button id="scrollTopBtn" class="scroll-top">↑</button>
+<button id="scrollTop" class="scroll-top" aria-label="Back to top">
+  ↑
+</button>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -184,8 +182,10 @@
   <script src="/assets/js/scroll-top.js" defer></script>
   <script src="/assets/js/scroll-progress.js" defer></script>
   <script src="/assets/js/page-transition.js" defer></script>
+  <script src="/assets/js/include.js"></script>
 
   <!-- Blog filter/search -->
   <script src="/assets/js/blog-filter.js" defer></script>
+
 </body>
 </html>

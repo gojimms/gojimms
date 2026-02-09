@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>gojimms — IT & System Integration</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+  <meta name="theme-color" content="#0e0e11">
+
+  <title>gojimms - IT & System Integration</title>
   <meta name="description" content="Personal website gojimms: IT Support, System Integration, Web Development, dan proyek di bidang pendidikan & komunitas." />
 
   <!-- CSS -->
@@ -34,10 +38,7 @@
   <div class="scroll-progress-bar" id="scrollProgressBar"></div>
  </div>
 
-  <!-- Header injected -->
-  <div data-include="/partials/header.html"></div>
-
-  <!-- HEADER (paste dari partials/header.html) -->
+  <!-- HEADER (paste dari partials/header.html, versi ID) -->
   <header class="site-header">
     <nav class="navbar container">
       <div class="brand">
@@ -45,18 +46,45 @@
       </div>
 
       <ul class="nav-links">
-        <li><a href="/id/" class="is-active">Home</a></li>
-        <li><a href="/id/about.html">About</a></li>
+        <li><a href="/id/">Home</a></li>
+        <li><a href="/id/about.html" class="is-active">About</a></li>
         <li><a href="/id/portfolio.html">Portfolio</a></li>
         <li><a href="/id/blog/">Blog</a></li>
         <li><a href="/id/contact.html">Contact</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a href="/en/" class="lang-switch" aria-label="Switch to English">EN</a>
+        <a href="/en/about.html" class="lang-switch" aria-label="Switch to English">EN</a>
         <button id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Open menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
       </div>
     </nav>
+
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <div class="mobile-menu-inner container">
+        <div class="mobile-menu-top">
+          <p class="mobile-menu-title">Menu</p>
+          <button class="menu-close" id="menuClose" aria-label="Close menu">✕</button>
+        </div>
+
+        <ul class="mobile-links">
+          <li><a href="/id/">Home</a></li>
+          <li><a href="/id/about.html">About</a></li>
+          <li><a href="/id/portfolio.html">Portfolio</a></li>
+          <li><a href="/id/blog/">Blog</a></li>
+          <li><a href="/id/contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
   </header>
 
   <main id="main-content">
@@ -238,7 +266,7 @@
           <a class="post-card" href="/id/blog/post-1.html">
             <p class="post-tag">IT / Notes</p>
             <h3 class="post-title">Checklist migrasi aplikasi: biar nggak panik saat go-live</h3>
-            <p class="post-excerpt">Yang wajib dicek sebelum, saat, dan setelah migrasi—versi ringkas dan praktis.</p>
+            <p class="post-excerpt">Yang wajib dicek sebelum, saat, dan setelah migrasi-versi ringkas dan praktis.</p>
           </a>
 
           <a class="post-card" href="/id/blog/">
@@ -278,23 +306,23 @@
    <!-- Footer injected -->
   <div data-include="/partials/footer.html"></div>
 
-  <!-- FOOTER (sementara inline dulu) -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p class="footer-left">© <span id="year"></span> gojimms</p>
-      <div class="footer-right">
-        <a href="#" class="footer-link">LinkedIn</a>
-        <a href="#" class="footer-link">GitHub</a>
-        <a href="/id/contact.html" class="footer-link">Email</a>
-      </div>
-    </div>
-  </footer>
-
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 
-<button id="scrollTopBtn" class="scroll-top" aria-label="Scroll to top" title="Back to top">↑</button>
+<button id="scrollTop" class="scroll-top" aria-label="Back to top">
+  ↑
+</button>
+
+  <!-- Scripts -->
+  <script src="/assets/js/darkmode.js" defer></script>
+  <script src="/assets/js/nav.js" defer></script>
+  <script src="/assets/js/active-nav.js" defer></script>
+  <script src="/assets/js/motion.js" defer></script>
+  <script src="/assets/js/scroll-top.js" defer></script>
+  <script src="/assets/js/scroll-progress.js" defer></script>
+  <script src="/assets/js/page-transition.js" defer></script>
+  <script src="/assets/js/include.js"></script>
 
 </body>
 </html>

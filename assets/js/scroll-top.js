@@ -1,23 +1,18 @@
-// ============================
-// Scroll To Top Button
-// ============================
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("scrollTopBtn");
+(() => {
+  const btn = document.getElementById("scrollTop");
   if (!btn) return;
 
-  const toggleVisibility = () => {
-    // muncul setelah scroll 400px
-    if (window.scrollY > 400) {
-      btn.classList.add("is-visible");
-    } else {
-      btn.classList.remove("is-visible");
-    }
+  const THRESHOLD = 300; // px, bebas kamu atur (200-500 enak)
+
+  const toggle = () => {
+    if (window.scrollY > THRESHOLD) btn.classList.add("is-visible");
+    else btn.classList.remove("is-visible");
   };
 
-  window.addEventListener("scroll", toggleVisibility, { passive: true });
-  toggleVisibility();
+  window.addEventListener("scroll", toggle, { passive: true });
+  toggle();
 
   btn.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
-});
+})();

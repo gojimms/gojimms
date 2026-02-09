@@ -47,3 +47,12 @@ body {
   font-size:18px;
   line-height:1;
 }
+
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 999;                 /* biar di atas konten */
+  background: var(--bg);        /* biar ga transparan */
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);  /* optional: efek glass */
+}

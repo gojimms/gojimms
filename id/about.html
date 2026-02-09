@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>About — gojimms</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+  <meta name="theme-color" content="#0e0e11">
+
+  <title>About - gojimms</title>
   <meta name="description" content="Tentang gojimms: IT Support & Systems Analyst, fokus pada system integration, web development, dan layanan pendidikan & komunitas." />
 
   <link rel="stylesheet" href="/assets/css/theme.css" />
@@ -64,10 +68,6 @@
           <li><a href="/id/blog/">Blog</a></li>
           <li><a href="/id/contact.html">Contact</a></li>
         </ul>
-
-        <div class="mobile-actions">
-          <a class="btn btn-ghost" href="/en/about.html">Switch to EN</a>
-        </div>
       </div>
     </div>
   </header>
@@ -188,9 +188,9 @@
 
         <div class="timeline">
           <div class="timeline-item">
-            <p class="timeline-year">2026 — Now</p>
+            <p class="timeline-year">2026 - Now</p>
             <div class="timeline-body">
-              <p class="timeline-title">Member of Dapodik & IT Team — Direktorat PAUD</p>
+              <p class="timeline-title">Member of Dapodik & IT Team - Direktorat PAUD</p>
               <p class="timeline-text">
                 Menangani dukungan aplikasi dan infrastruktur, memastikan layanan berjalan stabil, serta membantu dokumentasi teknis dan koordinasi proses.
               </p>
@@ -198,7 +198,7 @@
           </div>
 
           <div class="timeline-item">
-            <p class="timeline-year">2024 — 2025</p>
+            <p class="timeline-year">2024 - 2025</p>
             <div class="timeline-body">
               <p class="timeline-title">Projects & Community Programs</p>
               <p class="timeline-text">
@@ -264,19 +264,12 @@
     </section>
   </main>
 
-  <!-- Footer inline dulu -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p class="footer-left">© <span id="year"></span> gojimms</p>
-      <div class="footer-right">
-        <a href="#" class="footer-link">LinkedIn</a>
-        <a href="#" class="footer-link">GitHub</a>
-        <a href="/id/contact.html" class="footer-link">Email</a>
-      </div>
-    </div>
-  </footer>
+   <!-- Footer injected -->
+  <div data-include="/partials/footer.html"></div>
 
-  <button id="scrollTopBtn" class="scroll-top" aria-label="Scroll to top" title="Back to top">↑</button>
+<button id="scrollTop" class="scroll-top" aria-label="Back to top">
+  ↑
+</button>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -290,5 +283,7 @@
   <script src="/assets/js/scroll-top.js" defer></script>
   <script src="/assets/js/scroll-progress.js" defer></script>
   <script src="/assets/js/page-transition.js" defer></script>
+  <script src="/assets/js/include.js"></script>
+
 </body>
 </html>

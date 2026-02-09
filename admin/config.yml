@@ -2,6 +2,13 @@ backend:
   name: git-gateway
   branch: main
 
+# (opsional tapi bagus)
+site_url: https://gojimms.com
+display_url: https://gojimms.com
+
+# biar bisa jalan saat dev lokal
+local_backend: true
+
 media_folder: "assets/images/blog"
 public_folder: "/assets/images/blog"
 

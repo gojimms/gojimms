@@ -2,9 +2,14 @@
 <html lang="id" data-theme="light">
 <head>
   <meta charset="UTF-8" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+    <meta name="theme-color" content="#0e0e11">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Portfolio — gojimms</title>
+  <title>Portfolio - gojimms</title>
   <meta name="description" content="Portfolio gojimms: project IT, system integration, website, dan dokumentasi untuk pemerintah, pendidikan, dan komunitas." />
 
   <link rel="stylesheet" href="/assets/css/theme.css" />
@@ -91,7 +96,7 @@
           <article class="project-item" id="project-1">
             <div class="project-head">
               <h2 class="project-title">Migrasi & Stabilisasi Aplikasi PAUD</h2>
-              <span class="project-year">2025–2026</span>
+              <span class="project-year">2025-2026</span>
             </div>
 
             <div class="project-meta">
@@ -180,7 +185,7 @@
           <article class="project-item" id="project-3">
             <div class="project-head">
               <h2 class="project-title">Dokumentasi Program & Community Project</h2>
-              <span class="project-year">2024–2025</span>
+              <span class="project-year">2024-2025</span>
             </div>
 
             <div class="project-meta">
@@ -238,18 +243,12 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p class="footer-left">© <span id="year"></span> gojimms</p>
-      <div class="footer-right">
-        <a href="#" class="footer-link">LinkedIn</a>
-        <a href="#" class="footer-link">GitHub</a>
-        <a href="/id/contact.html" class="footer-link">Email</a>
-      </div>
-    </div>
-  </footer>
+  <!-- Footer injected -->
+   <div data-include="/partials/footer.html"></div>
 
-  <button id="scrollTopBtn" class="scroll-top">↑</button>
+  <button id="scrollTop" class="scroll-top" aria-label="Back to top">
+  ↑
+</button>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -263,5 +262,7 @@
   <script src="/assets/js/scroll-top.js" defer></script>
   <script src="/assets/js/scroll-progress.js" defer></script>
   <script src="/assets/js/page-transition.js" defer></script>
+  <script src="/assets/js/include.js"></script>
+
 </body>
 </html>

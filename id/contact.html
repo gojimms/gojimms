@@ -4,8 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Contact — gojimms</title>
+  <title>Contact - gojimms</title>
   <meta name="description" content="Hubungi gojimms untuk kolaborasi, project, atau diskusi terkait system integration, website, dan dokumentasi." />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+  <meta name="theme-color" content="#0e0e11">
 
   <link rel="stylesheet" href="/assets/css/theme.css" />
   <link rel="stylesheet" href="/assets/css/style.css" />
@@ -149,7 +153,8 @@
               <div class="form-actions">
                 <button class="btn btn-primary" type="submit">Kirim</button>
                 <!-- OPSI A fallback: mailto -->
-                <a class="btn btn-ghost" href="mailto:youremail@example.com?subject=Hello%20gojimms&body=Halo%20gojimms,%0A%0ASaya%20ingin%20diskusi%20tentang...">
+                <a class="btn btn-ghost"
+                  href="mailto:hi@gojimms.com?subject=Halo%20gojimms">
                   Email langsung
                 </a>
               </div>
@@ -159,40 +164,17 @@
               </p>
             </form>
 
-            <!-- Kalau kamu MAU pure mailto (tanpa service):
-                 hapus form di atas, dan pakai tombol "Email langsung" aja -->
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="section" data-reveal>
-      <div class="container cta">
-        <h2 class="cta-title">Prefer yang simpel?</h2>
-        <p class="cta-text">
-          Kamu bisa langsung kirim email atau DM via LinkedIn. Aku akan respon secepatnya.
-        </p>
-        <div class="cta-actions">
-          <a class="btn btn-primary" href="mailto:youremail@example.com">Email</a>
-          <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-      </div>
-    </section>
-  </main>
+   <!-- Footer injected -->
+  <div data-include="/partials/footer.html"></div>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p class="footer-left">© <span id="year"></span> gojimms</p>
-      <div class="footer-right">
-        <a href="#" class="footer-link">LinkedIn</a>
-        <a href="#" class="footer-link">GitHub</a>
-        <a href="/id/contact.html" class="footer-link">Email</a>
-      </div>
-    </div>
-  </footer>
-
-  <button id="scrollTopBtn" class="scroll-top">↑</button>
+<button id="scrollTop" class="scroll-top" aria-label="Back to top">
+  ↑
+</button>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -206,5 +188,7 @@
   <script src="/assets/js/scroll-top.js" defer></script>
   <script src="/assets/js/scroll-progress.js" defer></script>
   <script src="/assets/js/page-transition.js" defer></script>
+  <script src="/assets/js/include.js"></script>
+
 </body>
 </html>
