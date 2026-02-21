@@ -3,8 +3,8 @@ backend:
   branch: main
 
 # (opsional tapi bagus)
-site_url: https://gojimms.com
-display_url: https://gojimms.com
+site_url: https://www.gojimms.com
+display_url: https://www.gojimms.com
 
 # biar bisa jalan saat dev lokal
 local_backend: true
