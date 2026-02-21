@@ -1,2 +1,3 @@
-/admin/*  /admin/index.html  200
-/.netlify/identity/*  /admin/index.html  200
+/admin/config.yml   /admin/config.yml   200
+/admin/*            /admin/index.html   200
+/.netlify/identity/* /admin/index.html  200
