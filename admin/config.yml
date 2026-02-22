@@ -2,12 +2,12 @@ backend:
   name: git-gateway
   branch: main
 
-# (opsional tapi bagus)
+# Pakai domain PRIMARY yang kamu set di Netlify
 site_url: https://www.gojimms.com
 display_url: https://www.gojimms.com
 
-# biar bisa jalan saat dev lokal
-local_backend: true
+# matiin dulu biar ga bikin behavior aneh saat bukan localhost
+# local_backend: true
 
 media_folder: "assets/images/blog"
 public_folder: "/assets/images/blog"
