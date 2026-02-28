@@ -1,27 +1,24 @@
-// ============================
-// Simple HTML Includes (partials)
-// ============================
-document.addEventListener("DOMContentLoaded", async () => {
-  const includeEls = document.querySelectorAll("[data-include]");
-  if (!includeEls.length) return;
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const currentPath = window.location.pathname;
+  const navLinks = document.querySelectorAll(".nav-links a, .mobile-links a");
 
-  const fetchAndSet = async (el) => {
-    const file = el.getAttribute("data-include");
-    if (!file) return;
+  navLinks.forEach(link => {
+    const linkPath = new URL(link.href).pathname;
 
-    try {
-      const res = await fetch(file, { cache: "no-cache" });
-      if (!res.ok) throw new Error(`Failed to load: ${file}`);
-      const html = await res.text();
-      el.outerHTML = html; // replace placeholder with actual HTML
-    } catch (err) {
-      console.error(err);
+    // Home fix (untuk /id/ dan /id/index.html)
+    if (
+      (currentPath === "/id/" || currentPath === "/id/index.html") &&
+      linkPath === "/id/"
+    ) {
+      link.classList.add("is-active");
+      return;
     }
-  };
 
-  // Load includes sequentially (lebih aman untuk urutan header/footer)
-  for (const el of includeEls) {
-    // eslint-disable-next-line no-await-in-loop
-    await fetchAndSet(el);
-  }
+    // Halaman lain
+    if (currentPath.startsWith(linkPath) && linkPath !== "/id/") {
+      link.classList.add("is-active");
+    }
+  });
 });
+</script>
