@@ -1,69 +1,160 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- meta.html include kalau kamu pakai partial -->
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+  <meta name="theme-color" content="#0e0e11">
+
+  <!-- =========================
+       BASIC META
+  ========================= -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Privacy Policy | gojimms</title>
-  <meta name="description" content="Privacy Policy for gojimms.com. Learn how we handle personal data, cookies, analytics, and contact form submissions." />
+  <meta name="description" content="Privacy Policy for gojimms.com. Learn how personal data, cookies, and analytics are handled." />
   <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="https://www.gojimms.com/privacy-policy" />
+  <link rel="canonical" href="https://www.gojimms.com/en/privacy-policy.html" />
+
+  <!-- =========================
+       GLOBAL STYLES
+  ========================= -->
+  <link rel="stylesheet" href="/assets/css/theme.css" />
+  <link rel="stylesheet" href="/assets/css/animation.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 
 <body>
-  <!-- header.html include kalau kamu pakai partial -->
 
+  <!-- =========================
+       HEADER (INLINE)
+  ========================= -->
+  <header class="site-header">
+    <nav class="navbar container">
+      <div class="brand">
+        <a href="/en/">gojimms</a>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="/en/">Home</a></li>
+        <li><a href="/en/about.html">About</a></li>
+        <li><a href="/en/portfolio.html">Portfolio</a></li>
+        <li><a href="/en/blog/">Blog</a></li>
+        <li><a href="/en/contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="/id/privacy-policy.html" class="lang-switch">ID</a>
+        <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Open menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <div class="mobile-menu-inner container">
+        <div class="mobile-menu-top">
+          <p class="mobile-menu-title">Menu</p>
+          <button class="menu-close" id="menuClose">×</button>
+        </div>
+
+        <ul class="mobile-links">
+          <li><a href="/en/">Home</a></li>
+          <li><a href="/en/about.html">About</a></li>
+          <li><a href="/en/portfolio.html">Portfolio</a></li>
+          <li><a href="/en/blog/">Blog</a></li>
+          <li><a href="/en/contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================
+       MAIN CONTENT
+  ========================= -->
   <main class="main">
     <section class="section section-soft">
-      <div class="container" style="max-width: 900px;">
-        <h1>Privacy Policy</h1>
-        <p class="muted">Last updated: <strong>February 2026</strong></p>
+      <div class="container" style="max-width:900px">
 
-        <div class="card" style="margin-top:16px;">
+        <!-- TITLE -->
+        <header style="margin-bottom:16px">
+          <h1>Privacy Policy</h1>
+          <p class="muted">Last updated: <strong>February 2026</strong></p>
+        </header>
+
+        <!-- INTRO CARD -->
+        <div class="card">
           <p>
-            This Privacy Policy explains how <strong>gojimms</strong> (“we”, “us”, “our”) collects, uses, and protects
-            your information when you visit <strong>gojimms.com</strong>.
+            This Privacy Policy explains how <strong>gojimms</strong> (“we”)
+            collects, uses, and protects your information when you access
+            <strong>gojimms.com</strong>.
           </p>
-          <p>
-            If you have any questions, contact us at:
+          <p class="muted">
+            Questions? Contact:
             <a class="text-link" href="mailto:hi@gojimms.com">hi@gojimms.com</a>
           </p>
         </div>
 
-        <h2 style="margin-top:28px;">Quick Summary</h2>
+        <!-- SUMMARY -->
+        <h2 style="margin-top:28px">Quick Summary</h2>
         <ul>
-          <li>We collect information you submit via contact forms (e.g., name, email, message).</li>
-          <li>We may use analytics/cookies to understand traffic and improve the site.</li>
-          <li>We don’t sell your personal data.</li>
-          <li>You can request data deletion by emailing <a class="text-link" href="mailto:hi@gojimms.com">hi@gojimms.com</a>.</li>
+          <li>Data may be collected through the contact form (name, email, message).</li>
+          <li>Cookies/analytics may be used to understand traffic and usage.</li>
+          <li>We do not sell personal data.</li>
+          <li>You can request data deletion via email.</li>
         </ul>
 
-        <hr style="margin:28px 0; opacity:.25;" />
+        <hr style="margin:28px 0; opacity:.25">
 
-        <h2>Full Privacy Policy (TermsFeed)</h2>
-        <p class="muted">
-          The legal text below is based on the policy generated via TermsFeed.
+        <!-- TERMSFEED -->
+        <h2>Full Legal Version (TermsFeed)</h2>
+        <p class="muted">Complete legal document:</p>
+        <p>
+          <a class="text-link" target="_blank" rel="noopener"
+             href="https://www.termsfeed.com/live/20d4a7d8-e900-4e44-9769-765da31c3f11">
+            termsfeed.com/live/20d4a7d8-e900-4e44-9769-765da31c3f11
+          </a>
         </p>
 
-        <!-- =========================
-             Paste TermsFeed content here
-             FROM: https://www.termsfeed.com/live/20d4a7d8-e900-4e44-9769-765da31c3f11
-             ========================= -->
-        <article class="legal">
-          <p><em>Paste your TermsFeed Privacy Policy content here.</em></p>
-        </article>
+        <hr style="margin:28px 0; opacity:.25">
 
-        <hr style="margin:28px 0; opacity:.25;" />
-
+        <!-- CONTACT -->
         <h2>Contact</h2>
         <p>
-          For questions or requests related to this Privacy Policy, email:
+          Email:
           <a class="text-link" href="mailto:hi@gojimms.com">hi@gojimms.com</a>
         </p>
+
       </div>
     </section>
   </main>
 
-  <!-- footer.html include kalau kamu pakai partial -->
+  <!-- FOOTER (PARTIAL) -->
+  <div data-include="/partials/footer.html"></div>
+
+  <!-- SCROLL TO TOP BUTTON -->
+  <button id="scrollTop" class="scroll-top" aria-label="Back to top">
+    ↑
+  </button>
+
+  <!-- SCRIPTS -->
+  <script src="/assets/js/include.js" defer></script>
+  <script src="/assets/js/darkmode.js" defer></script>
+  <script src="/assets/js/nav.js" defer></script>
+  <script src="/assets/js/active-nav.js" defer></script>
+  <script src="/assets/js/motion.js" defer></script>
+  <script src="/assets/js/scroll-top.js" defer></script>
+  <script src="/assets/js/scroll-progress.js" defer></script>
+  <script src="/assets/js/page-transition.js" defer></script>
+
 </body>
 </html>
