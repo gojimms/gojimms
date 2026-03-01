@@ -3,65 +3,193 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog (EN) — gojimms</title>
-  <meta name="description" content="Short notes about IT, systems, and practical documentation." />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+  <meta name="theme-color" content="#0e0e11">
+
+  <title>Blog - gojimms</title>
+  <meta name="description" content="Short notes on IT, systems, documentation, and practical lessons from gojimms." />
 
   <link rel="stylesheet" href="/assets/css/theme.css" />
   <link rel="stylesheet" href="/assets/css/style.css" />
-  <link rel="stylesheet" href="/assets/css/animation.css" />
+  <link rel="stylesheet" href="/assets/css/animations.css" />
 </head>
-<body>
-  <main class="section">
-    <div class="container">
-      <p class="kicker">Blog (EN)</p>
-      <h1 class="hero-title" style="font-size: clamp(2rem, 4vw, 3rem);">English posts (coming gradually).</h1>
-      <p class="hero-subtitle">If an English post is not available yet, you can open the Indonesian version.</p>
-    </div>
-  </main>
 
-  <section class="section section-soft">
-    <div class="container">
-      <div class="blog-list" id="blogList">
-        <!-- POSTS:START -->
-<a class="blog-item" href="/en/blog/post-1.html" data-tags="it system">
-  <div class="blog-left">
-    <p class="blog-tag">IT • System</p>
-    <h2 class="blog-title">Checklist migrasi aplikasi: biar nggak panik saat go-live</h2>
-    <p class="blog-excerpt">Yang wajib dicek sebelum, saat, dan setelah migrasi—versi ringkas dan praktis.</p>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <div class="scroll-progress" aria-hidden="true">
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
   </div>
-  <div class="blog-right">
-    <span class="blog-date">2026</span>
-    <span class="blog-read">5 min read</span>
-    <span class="work-arrow" aria-hidden="true">→</span>
-  </div>
-</a>
-<a class="blog-item" href="/en/blog/post-2.html" data-tags="docs">
-  <div class="blog-left">
-    <p class="blog-tag">Docs</p>
-    <h2 class="blog-title">Dokumentasi teknis yang enak dibaca itu seperti apa?</h2>
-    <p class="blog-excerpt">Dokumentasi bukan soal panjang, tapi soal bisa dipakai.</p>
-  </div>
-  <div class="blog-right">
-    <span class="blog-date">2026</span>
-    <span class="blog-read">4 min read</span>
-    <span class="work-arrow" aria-hidden="true">→</span>
-  </div>
-</a>
-<a class="blog-item" href="/en/blog/apa-itu-komputer-dan-mengapa-penting-dalam-kehidupan-sehari-hari.html" data-tags="it komputer teknologi informasi">
-  <div class="blog-left">
-    <p class="blog-tag">IT • Komputer • Teknologi • Informasi</p>
-    <h2 class="blog-title">Apa Itu Komputer dan Mengapa Penting dalam Kehidupan Sehari-hari?</h2>
-    <p class="blog-excerpt">Komputer sudah jadi bagian hidup sehari-hari. Tapi sebenarnya apa itu komputer dan kenapa penting?</p>
-  </div>
-  <div class="blog-right">
-    <span class="blog-date">2026</span>
-    <span class="blog-read">5 min read</span>
-    <span class="work-arrow" aria-hidden="true">→</span>
-  </div>
-</a>
-<!-- POSTS:END -->
+
+  <!-- HEADER (EN) -->
+  <header class="site-header">
+    <nav class="navbar container">
+      <div class="brand">
+        <a href="/en/">gojimms</a>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="/en/">Home</a></li>
+        <li><a href="/en/about.html">About</a></li>
+        <li><a href="/en/portfolio.html">Portfolio</a></li>
+        <li><a href="/en/blog/">Blog</a></li>
+        <li><a href="/en/contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="/id/blog/" class="lang-switch">ID</a>
+        <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Open menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+      </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <div class="mobile-menu-inner container">
+        <div class="mobile-menu-top">
+          <p class="mobile-menu-title">Menu</p>
+          <button class="menu-close" id="menuClose">✕</button>
+        </div>
+
+        <ul class="mobile-links">
+          <li><a href="/en/">Home</a></li>
+          <li><a href="/en/about.html">About</a></li>
+          <li><a href="/en/portfolio.html">Portfolio</a></li>
+          <li><a href="/en/blog/">Blog</a></li>
+          <li><a href="/en/contact.html">Contact</a></li>
+        </ul>
       </div>
     </div>
-  </section>
+  </header>
+
+  <main id="main-content">
+    <!-- BLOG HERO -->
+    <section class="section" data-reveal>
+      <div class="container blog-hero">
+        <div>
+          <p class="kicker">Blog</p>
+          <h1 class="hero-title" style="font-size: clamp(2rem, 4vw, 3rem);">
+            Short notes—focused on what you can actually use.
+          </h1>
+          <p class="hero-subtitle">
+            IT, systems, documentation, and practical lessons. Written concisely for quick understanding.
+          </p>
+        </div>
+
+        <div class="blog-controls">
+          <label class="sr-only" for="blogSearch">Search articles</label>
+          <input id="blogSearch" class="blog-search" type="search" placeholder="Search articles..." />
+          <div class="blog-tags">
+            <button class="tag-btn is-active" data-tag="all" type="button">All</button>
+            <button class="tag-btn" data-tag="it" type="button">IT</button>
+            <button class="tag-btn" data-tag="system" type="button">System</button>
+            <button class="tag-btn" data-tag="web" type="button">Web</button>
+            <button class="tag-btn" data-tag="docs" type="button">Docs</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POSTS -->
+    <section class="section section-soft" data-reveal>
+      <div class="container">
+        <div class="blog-list" id="blogList">
+          <!-- POSTS:START -->
+
+          <a class="blog-item" href="/en/blog/post-1.html" data-tags="it system">
+            <div class="blog-left">
+              <p class="blog-tag">IT • System</p>
+              <h2 class="blog-title">App migration checklist: stay calm during go-live</h2>
+              <p class="blog-excerpt">What to check before, during, and after migration—short and practical.</p>
+            </div>
+            <div class="blog-right">
+              <span class="blog-date">2026</span>
+              <span class="blog-read">5 min read</span>
+              <span class="work-arrow" aria-hidden="true">→</span>
+            </div>
+          </a>
+
+          <a class="blog-item" href="/en/blog/post-2.html" data-tags="docs">
+            <div class="blog-left">
+              <p class="blog-tag">Docs</p>
+              <h2 class="blog-title">What does “readable technical documentation” look like?</h2>
+              <p class="blog-excerpt">Docs are not about length—it's about usability.</p>
+            </div>
+            <div class="blog-right">
+              <span class="blog-date">2026</span>
+              <span class="blog-read">4 min read</span>
+              <span class="work-arrow" aria-hidden="true">→</span>
+            </div>
+          </a>
+
+          <a class="blog-item" href="/en/blog/what-is-a-computer-and-why-it-matters-in-daily-life.html" data-tags="it computer technology information">
+            <div class="blog-left">
+              <p class="blog-tag">IT • Computer • Technology • Information</p>
+              <h2 class="blog-title">What Is a Computer and Why Does It Matter in Daily Life?</h2>
+              <p class="blog-excerpt">Computers are everywhere. But what are they, and why do they matter?</p>
+            </div>
+            <div class="blog-right">
+              <span class="blog-date">2026</span>
+              <span class="blog-read">5 min read</span>
+              <span class="work-arrow" aria-hidden="true">→</span>
+            </div>
+          </a>
+
+          <!-- POSTS:END -->
+        </div>
+
+        <p class="blog-empty" id="blogEmpty" style="display:none;">
+          No matching posts found. Try another keyword.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" data-reveal>
+      <div class="container cta">
+        <h2 class="cta-title">Have a topic you’d like me to cover?</h2>
+        <p class="cta-text">Send your article idea or question. If it fits, I’ll write a short practical version.</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="/en/contact.html">Contact</a>
+          <a class="btn btn-ghost" href="/en/portfolio.html">Portfolio</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer injected -->
+  <div data-include="/partials/footer.html"></div>
+
+  <button id="scrollTop" class="scroll-top" aria-label="Back to top">
+    ↑
+  </button>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <!-- Scripts -->
+  <script src="/assets/js/darkmode.js" defer></script>
+  <script src="/assets/js/nav.js" defer></script>
+  <script src="/assets/js/active-nav.js" defer></script>
+  <script src="/assets/js/motion.js" defer></script>
+  <script src="/assets/js/scroll-top.js" defer></script>
+  <script src="/assets/js/scroll-progress.js" defer></script>
+  <script src="/assets/js/page-transition.js" defer></script>
+  <script src="/assets/js/include.js"></script>
+
+  <!-- Blog filter/search -->
+  <script src="/assets/js/blog-filter.js" defer></script>
+
 </body>
 </html>
