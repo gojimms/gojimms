@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+  <meta name="theme-color" content="#0e0e11">
+
+  <title>What Does Readable Technical Documentation Look Like? - gojimms</title>
+  <meta name="description" content="How to structure technical documentation so teams can understand and actually use it." />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="What Does Readable Technical Documentation Look Like?" />
+  <meta property="og:description" content="How to structure technical documentation so teams can understand and actually use it." />
+  <meta property="og:url" content="https://gojimms.com/en/blog/readable-technical-documentation-structure.html" />
+  <meta property="og:image" content="https://gojimms.com/assets/images/og/default.jpg" />
+
+  <link rel="canonical" href="https://gojimms.com/en/blog/readable-technical-documentation-structure.html" />
+  <link rel="alternate" hreflang="id" href="https://gojimms.com/id/blog/post-2.html" />
+  <link rel="alternate" hreflang="en" href="https://gojimms.com/en/blog/readable-technical-documentation-structure.html" />
+
+  <link rel="stylesheet" href="/assets/css/theme.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/animation.css" />
+</head>
+
+<body>
+<a class="skip-link" href="/en/blog/readable-technical-documentation-structure.html"</a>
+
+<header class="site-header">
+  <nav class="navbar container">
+    <div class="brand">
+      <a href="/en/">gojimms</a>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="/en/">Home</a></li>
+      <li><a href="/en/about.html">About</a></li>
+      <li><a href="/en/portfolio.html">Portfolio</a></li>
+      <li><a href="/en/blog/">Blog</a></li>
+      <li><a href="/en/contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="/id/blog/post-2.html" class="lang-switch">ID</a>
+      <button id="darkModeToggle">🌙</button>
+    </div>
+  </nav>
+</header>
+
+<main id="main-content">
+
+<section class="section">
+  <div class="container post-header">
+    <a href="/en/blog/" class="text-link">← Back to Blog</a>
+
+    <p class="post-kicker">Docs</p>
+    <h1 class="post-title">What Does Readable Technical Documentation Look Like?</h1>
+
+    <div class="post-meta">
+      <span class="pill">2026</span>
+      <span class="pill">4 min read</span>
+      <span class="pill">by Jimmy Suseno</span>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft">
+<div class="container post-grid">
+
+<aside class="post-toc">
+  <div class="toc-card">
+    <p class="toc-title">Table of Contents</p>
+    <ol class="toc-list">
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#problems">Common Problems</a></li>
+      <li><a href="#principles">Core Principles</a></li>
+      <li><a href="#structure">Ideal Structure</a></li>
+      <li><a href="#example">Practical Example</a></li>
+      <li><a href="#closing">Closing</a></li>
+    </ol>
+  </div>
+</aside>
+
+<article class="post-content">
+
+<p class="lead" id="intro">
+Technical documentation is often treated as an afterthought—
+written at the end, read only when necessary.
+In reality, documentation is the bridge between systems,
+people, and workflows.
+</p>
+
+<p>
+Readable documentation does not mean casual language
+or decorative illustrations.
+It means <strong>clear, structured, and relevant to its audience</strong>.
+This article explains how to create documentation
+that teams actually use—not just store in a folder.
+</p>
+
+<h2 id="problems">Common Documentation Problems</h2>
+
+<p>
+Many documents fail because they are written
+from the system’s perspective—not the human’s.
+Common issues include:
+</p>
+
+<ul>
+<li>Overly technical without usage context</li>
+<li>Unclear target audience</li>
+<li>Never updated after system changes</li>
+<li>Poor structure and difficult navigation</li>
+</ul>
+
+<p>
+As a result, during incidents or staff transitions,
+teams fall back to private chats and memory.
+</p>
+
+<h2 id="principles">Principles of Readable Documentation</h2>
+
+<p>
+Effective technical documentation typically follows
+these core principles:
+</p>
+
+<ol>
+<li>
+<strong>Role-Based</strong><br>
+Admins, developers, and operational users
+have different needs. Documentation must reflect that.
+</li>
+
+<li>
+<strong>Task-Oriented</strong><br>
+Focus on what the reader needs to accomplish—
+not just definitions.
+</li>
+
+<li>
+<strong>Concise but Complete</strong><br>
+Not verbose, but detailed enough to execute
+without assumptions.
+</li>
+</ol>
+
+<h2 id="structure">Ideal Documentation Structure</h2>
+
+<p>
+A structure that works well across many teams includes:
+</p>
+
+<h3>1. System Overview</h3>
+<p>
+Explain the system’s purpose,
+context of use, and known limitations.
+</p>
+
+<h3>2. Architecture Summary</h3>
+<p>
+Keep it simple. Highlight key components
+and how they connect. A small diagram helps.
+</p>
+
+<h3>3. Operational Flow</h3>
+<p>
+Answer the question:
+<em>“What does daily usage look like?”</em>
+</p>
+
+<h3>4. Common Issues & Solutions</h3>
+<p>
+Documentation becomes far more valuable
+when it includes typical errors,
+root causes, and resolution steps.
+</p>
+
+<h2 id="example">A Practical Example</h2>
+
+<p>
+Instead of writing:
+<em>“Service runs on port 8080 using reverse proxy.”</em>
+</p>
+
+<p>
+It is more helpful to write:
+</p>
+
+<blockquote>
+The main service runs on port 8080 and is accessed through a reverse proxy.
+If the service cannot be accessed via browser,
+first check the service status and proxy configuration.
+</blockquote>
+
+<p>
+The difference is simple—
+but the impact on operational teams is significant.
+</p>
+
+<h2 id="closing">Closing</h2>
+
+<p>
+Technical documentation is not just a project requirement—
+it is a long-term asset.
+Readable documentation will:
+</p>
+
+<ul>
+<li>Accelerate onboarding</li>
+<li>Reduce dependency on specific individuals</li>
+<li>Support troubleshooting in critical situations</li>
+</ul>
+
+<p>
+If documentation can be understood
+without asking the original author,
+it is already on the right track.
+</p>
+
+<nav class="post-nav">
+  <a href="/en/blog/" class="post-nav-item">← All Articles</a>
+</nav>
+
+</article>
+</div>
+</section>
+</main>
+
+<div data-include="/partials/footer.html"></div>
+
+<script src="/assets/js/include.js"></script>
+<script src="/assets/js/darkmode.js" defer></script>
+<script src="/assets/js/nav.js" defer></script>
+<script src="/assets/js/active-nav.js" defer></script>
+
+</body>
+</html>
