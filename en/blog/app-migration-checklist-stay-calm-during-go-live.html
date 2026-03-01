@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+  <meta name="theme-color" content="#0e0e11">
+
+  <title>App Migration Checklist: Stay Calm During Go-Live - gojimms</title>
+  <meta name="description" content="A practical app migration checklist: before, during, and after go-live. Clear, realistic, and ready for teams to use." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="App Migration Checklist: Stay Calm During Go-Live" />
+  <meta property="og:description" content="A practical app migration checklist: before, during, and after go-live. Clear, realistic, and ready for teams to use." />
+  <meta property="og:url" content="https://gojimms.com/en/blog/app-migration-checklist-stay-calm-during-go-live.html" />
+  <meta property="og:image" content="https://gojimms.com/assets/images/og/default.jpg" />
+
+  <link rel="canonical" href="https://gojimms.com/en/blog/app-migration-checklist-stay-calm-during-go-live.html" />
+  <link rel="alternate" hreflang="id" href="https://gojimms.com/id/blog/post-1.html" />
+  <link rel="alternate" hreflang="en" href="https://gojimms.com/en/blog/app-migration-checklist-stay-calm-during-go-live.html" />
+
+  <link rel="stylesheet" href="/assets/css/theme.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/animation.css" />
+</head>
+
+<body>
+<a class="skip-link" href="/en/blog/app-migration-checklist-stay-calm-during-go-live.html"</a>
+
+<header class="site-header">
+  <nav class="navbar container">
+    <div class="brand">
+      <a href="/en/">gojimms</a>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="/en/">Home</a></li>
+      <li><a href="/en/about.html">About</a></li>
+      <li><a href="/en/portfolio.html">Portfolio</a></li>
+      <li><a href="/en/blog/">Blog</a></li>
+      <li><a href="/en/contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="/id/blog/post-1.html" class="lang-switch">ID</a>
+      <button id="darkModeToggle">🌙</button>
+    </div>
+  </nav>
+</header>
+
+<main id="main-content">
+<section class="section">
+  <div class="container post-header">
+    <a href="/en/blog/" class="text-link">← Back to Blog</a>
+
+    <p class="post-kicker">IT • System</p>
+    <h1 class="post-title">App Migration Checklist: Stay Calm During Go-Live</h1>
+
+    <div class="post-meta">
+      <span class="pill">2026</span>
+      <span class="pill">5 min read</span>
+      <span class="pill">by Jimmy Suseno</span>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft">
+<div class="container post-grid">
+
+<aside class="post-toc">
+  <div class="toc-card">
+    <p class="toc-title">Table of Contents</p>
+    <ol class="toc-list">
+      <li><a href="#summary">Quick Summary</a></li>
+      <li><a href="#before">Before Migration</a></li>
+      <li><a href="#during">During Migration</a></li>
+      <li><a href="#after">After Migration</a></li>
+      <li><a href="#closing">Closing</a></li>
+    </ol>
+  </div>
+</aside>
+
+<article class="post-content">
+
+<p class="lead" id="summary">
+Application migration is not just “moving servers.”
+Behind the deploy button and the go-live moment, there are many small decisions
+that—if missed—can cause panic within the team.
+This checklist is based on real field experience: concise, realistic,
+and usable by both technical and non-technical teams.
+</p>
+
+<p>
+The focus is simple: what must be checked before,
+controlled during, and validated after migration
+so the system remains stable and users are not affected.
+</p>
+
+<h2 id="before">1. Before Migration: Prepare the Foundation</h2>
+
+<p>
+This phase is often underestimated, yet most migration issues
+can actually be prevented here. Don’t rush to go-live
+if these fundamentals are not ready.
+</p>
+
+<ul>
+<li><strong>System Inventory</strong><br>
+Document all components: application, database, APIs,
+cron jobs, external services, and dependencies.
+Never rely on memory alone.
+</li>
+
+<li><strong>Backup & Rollback Plan</strong><br>
+Ensure backups are fresh and tested for restoration.
+A rollback plan must exist—even if (hopefully) it won’t be used.
+</li>
+
+<li><strong>Environment Parity</strong><br>
+OS version, runtime, database, and configurations
+should match between old and new servers as closely as possible.
+</li>
+
+<li><strong>DNS & TTL</strong><br>
+Lower DNS TTL hours or days before migration
+to speed up propagation during cut-over.
+</li>
+
+<li><strong>Stakeholder Communication</strong><br>
+Define migration schedule, PICs, and communication channels
+if issues occur.
+</li>
+</ul>
+
+<h2 id="during">2. During Migration: Stay Focused & Controlled</h2>
+
+<p>
+This is the most sensitive phase.
+The goal is not speed—but control.
+Follow sequence, don’t jump randomly between tasks.
+</p>
+
+<ul>
+<li><strong>Freeze Changes</strong><br>
+Pause deployments, major data input,
+and configuration changes during migration.
+</li>
+
+<li><strong>Real-Time Monitoring</strong><br>
+Monitor CPU, RAM, disk, logs, and error rate
+from the moment the application goes live.
+</li>
+
+<li><strong>Test Critical Functions</strong><br>
+Manually test login, key transactions,
+API integrations, and background processes.
+</li>
+
+<li><strong>Log Every Anomaly</strong><br>
+Even small irregularities should be documented.
+They are extremely helpful during post-migration review.
+</li>
+</ul>
+
+<h2 id="after">3. After Migration: Stabilization & Validation</h2>
+
+<p>
+Migration is not finished once the system is accessible.
+The post-migration phase determines whether it is truly successful—
+or just “looks successful.”
+</p>
+
+<ul>
+<li><strong>Extended Monitoring</strong><br>
+The first 24–72 hours are critical.
+Do not remove monitoring too quickly.
+</li>
+
+<li><strong>Data Validation</strong><br>
+Ensure no data is missing, duplicated,
+or out of sync.
+</li>
+
+<li><strong>Update Documentation</strong><br>
+Revise diagrams, SOPs, and technical notes
+to reflect the new setup.
+</li>
+
+<li><strong>User Feedback</strong><br>
+Users often discover issues
+that monitoring tools don’t immediately catch.
+</li>
+</ul>
+
+<h2 id="closing">Closing</h2>
+
+<p>
+A successful application migration is not about heroics
+or overnight overtime—it is about preparation,
+discipline, and communication.
+</p>
+
+<p>
+If you frequently work with production systems
+or public-facing services, structured documentation
+and clean processes will always save you.
+</p>
+
+<nav class="post-nav">
+  <a href="/en/blog/" class="post-nav-item">← All Articles</a>
+</nav>
+
+</article>
+</div>
+</section>
+</main>
+
+<div data-include="/partials/footer.html"></div>
+
+<script src="/assets/js/include.js"></script>
+<script src="/assets/js/darkmode.js" defer></script>
+<script src="/assets/js/nav.js" defer></script>
+<script src="/assets/js/active-nav.js" defer></script>
+</body>
+</html>
