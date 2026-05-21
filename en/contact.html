@@ -23,7 +23,7 @@
     <div class="scroll-progress-bar" id="scrollProgressBar"></div>
   </div>
 
-  <!-- HEADER (EN) -->
+  <!-- HEADER EN -->
   <header class="site-header">
     <nav class="navbar container">
       <div class="brand">
@@ -81,7 +81,8 @@
           Let’s talk.
         </h1>
         <p class="hero-subtitle">
-          If you need help with a website, system integration, or technical documentation—let’s start with a short conversation.
+          If you need help with a website, system integration, or technical documentation,
+          we can start with a short conversation.
         </p>
       </div>
     </section>
@@ -89,6 +90,7 @@
     <!-- CONTACT GRID -->
     <section class="section section-soft" data-reveal>
       <div class="container contact-grid">
+
         <!-- LEFT: INFO -->
         <div class="contact-info">
           <div class="card">
@@ -109,13 +111,16 @@
           <div class="card">
             <p class="card-title">What I can help with</p>
             <p class="card-text">
-              System integration, websites (static/WordPress), technical documentation, setup & monitoring, and team workflows.
+              System integration, static/WordPress websites, technical documentation,
+              setup & monitoring, and team workflows.
             </p>
           </div>
 
           <div class="card">
             <p class="card-title">Response time</p>
-            <p class="card-text">Usually within 24 hours on business days.</p>
+            <p class="card-text">
+              I usually respond within 24 hours on business days.
+            </p>
           </div>
         </div>
 
@@ -123,46 +128,90 @@
         <div class="contact-form-wrap">
           <div class="form-card">
             <h2 class="form-title">Send a message</h2>
-            <p class="form-desc">Fill out the form and your message will be sent to email.</p>
+            <p class="form-desc">
+              Fill out the form below. Your message will be submitted through Netlify Forms and can be forwarded to email.
+            </p>
 
-            <!-- =========================
-                 OPTION B (RECOMMENDED): Form Endpoint (Formspree / etc.)
-                 1) Register on Formspree
-                 2) Replace action with your endpoint
-                 ========================= -->
-            <form class="contact-form" action="https://formspree.io/f/yourFormId" method="POST">
+            <!-- Netlify Forms -->
+            <form
+              class="contact-form"
+              name="contact-en"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+            >
+              <input type="hidden" name="form-name" value="contact-en" />
+              <input type="hidden" name="redirect" value="/en/thank-you.html" />
+
+              <!-- Anti-spam honeypot -->
+              <p hidden>
+                <label>
+                  Don’t fill this field:
+                  <input name="bot-field" />
+                </label>
+              </p>
+
               <div class="form-row">
                 <label for="name">Name</label>
-                <input id="name" name="name" type="text" placeholder="Your name" required />
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Your name"
+                  autocomplete="name"
+                  required
+                />
               </div>
 
               <div class="form-row">
                 <label for="email">Email</label>
-                <input id="email" name="email" type="email" placeholder="youremail@example.com" required />
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="youremail@example.com"
+                  autocomplete="email"
+                  required
+                />
               </div>
 
               <div class="form-row">
                 <label for="subject">Topic</label>
-                <input id="subject" name="subject" type="text" placeholder="Example: Website, integration, documentation" />
+                <input
+                  id="subject"
+                  name="subject"
+                  type="text"
+                  placeholder="Example: Website, system integration, documentation"
+                />
               </div>
 
               <div class="form-row">
                 <label for="message">Message</label>
-                <textarea id="message" name="message" rows="6" placeholder="Tell me what you need (briefly)..." required></textarea>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="6"
+                  placeholder="Tell me what you need briefly..."
+                  required
+                ></textarea>
               </div>
 
               <div class="form-actions">
-                <button class="btn btn-primary" type="submit">Send</button>
+                <button class="btn btn-primary" type="submit">
+                  Send
+                </button>
 
-                <!-- OPTION A fallback: mailto -->
-                <a class="btn btn-ghost"
-                  href="mailto:hi@gojimms.com?subject=Hello%20gojimms">
+                <a
+                  class="btn btn-ghost"
+                  href="mailto:hi@gojimms.com?subject=Hello%20gojimms"
+                >
                   Email directly
                 </a>
               </div>
 
               <p class="form-note">
-                By sending this message, you agree that your data will only be used to respond to your request.
+                By sending this message, you agree that the submitted data will only be used
+                to respond to this communication request.
               </p>
             </form>
 
@@ -179,9 +228,11 @@
     </button>
 
     <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
+      const yearEl = document.getElementById("year");
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
     </script>
-
   </main>
 
   <!-- Scripts -->
