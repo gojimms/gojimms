@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Contact - gojimms</title>
-  <meta name="description" content="Hubungi gojimms untuk kolaborasi, project, atau diskusi terkait system integration, website, dan dokumentasi." />
+  <meta name="description" content="Hubungi gojimms untuk kolaborasi, project, atau diskusi terkait system integration, website, dan dokumentasi teknis." />
 
   <!-- Favicon -->
   <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
@@ -23,7 +23,7 @@
     <div class="scroll-progress-bar" id="scrollProgressBar"></div>
   </div>
 
-  <!-- HEADER (paste header ID) -->
+  <!-- HEADER ID -->
   <header class="site-header">
     <nav class="navbar container">
       <div class="brand">
@@ -35,7 +35,7 @@
         <li><a href="/id/about.html">About</a></li>
         <li><a href="/id/portfolio.html">Portfolio</a></li>
         <li><a href="/id/blog/">Blog</a></li>
-        <li><a href="/id/contact.html" class="is-active">Contact</a></li>
+        <li><a href="/id/contact.html">Contact</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -81,7 +81,8 @@
           Mari ngobrol.
         </h1>
         <p class="hero-subtitle">
-          Kalau kamu butuh bantuan untuk website, integrasi sistem, atau dokumentasi teknis—kita bisa mulai dari diskusi singkat.
+          Kalau kamu butuh bantuan untuk website, integrasi sistem, atau dokumentasi teknis,
+          kita bisa mulai dari diskusi singkat terlebih dahulu.
         </p>
       </div>
     </section>
@@ -89,12 +90,14 @@
     <!-- CONTACT GRID -->
     <section class="section section-soft" data-reveal>
       <div class="container contact-grid">
+
         <!-- LEFT: INFO -->
         <div class="contact-info">
           <div class="card">
             <p class="card-title">Email</p>
-            <!-- GANTI ke email kamu -->
-            <p class="card-text"><a class="text-link" href="mailto:hi@gojimms.com">hi@gojimms.com</a></p>
+            <p class="card-text">
+              <a class="text-link" href="mailto:hi@gojimms.com">hi@gojimms.com</a>
+            </p>
           </div>
 
           <div class="card">
@@ -106,15 +109,18 @@
           </div>
 
           <div class="card">
-            <p class="card-title">What I can help with</p>
+            <p class="card-title">Yang bisa dibantu</p>
             <p class="card-text">
-              System integration, website (static/WordPress), dokumentasi teknis, setup & monitoring, workflow tim.
+              System integration, website static/WordPress, dokumentasi teknis,
+              setup & monitoring, serta workflow tim.
             </p>
           </div>
 
           <div class="card">
-            <p class="card-title">Response time</p>
-            <p class="card-text">Biasanya balas 1×24 jam (hari kerja).</p>
+            <p class="card-title">Estimasi respons</p>
+            <p class="card-text">
+              Biasanya saya membalas dalam 1×24 jam pada hari kerja.
+            </p>
           </div>
         </div>
 
@@ -122,45 +128,90 @@
         <div class="contact-form-wrap">
           <div class="form-card">
             <h2 class="form-title">Kirim pesan</h2>
-            <p class="form-desc">Isi form ini, nanti pesanmu akan masuk ke email.</p>
+            <p class="form-desc">
+              Isi form berikut, nanti pesanmu akan masuk ke dashboard Netlify Forms dan bisa diteruskan ke email.
+            </p>
 
-            <!-- =========================
-                 OPSI B (REKOMENDASI): Form Endpoint (Formspree / dll)
-                 1) Daftar Formspree
-                 2) Ganti action ke endpoint kamu
-                 ========================= -->
-            <form class="contact-form" action="https://formspree.io/f/yourFormId" method="POST">
+            <!-- Netlify Forms -->
+            <form
+              class="contact-form"
+              name="contact-id"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+            >
+              <input type="hidden" name="form-name" value="contact-id" />
+              <input type="hidden" name="redirect" value="/id/thank-you.html" />
+
+              <!-- Anti-spam honeypot -->
+              <p hidden>
+                <label>
+                  Jangan isi field ini:
+                  <input name="bot-field" />
+                </label>
+              </p>
+
               <div class="form-row">
                 <label for="name">Nama</label>
-                <input id="name" name="name" type="text" placeholder="Nama kamu" required />
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Nama kamu"
+                  autocomplete="name"
+                  required
+                />
               </div>
 
               <div class="form-row">
                 <label for="email">Email</label>
-                <input id="email" name="email" type="email" placeholder="youremail@example.com" required />
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="youremail@example.com"
+                  autocomplete="email"
+                  required
+                />
               </div>
 
               <div class="form-row">
                 <label for="subject">Topik</label>
-                <input id="subject" name="subject" type="text" placeholder="Contoh: Website, integrasi, dokumentasi" />
+                <input
+                  id="subject"
+                  name="subject"
+                  type="text"
+                  placeholder="Contoh: Website, integrasi sistem, dokumentasi"
+                />
               </div>
 
               <div class="form-row">
                 <label for="message">Pesan</label>
-                <textarea id="message" name="message" rows="6" placeholder="Ceritain kebutuhan kamu secara singkat..." required></textarea>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="6"
+                  placeholder="Ceritakan kebutuhan kamu secara singkat..."
+                  required
+                ></textarea>
               </div>
 
               <div class="form-actions">
-                <button class="btn btn-primary" type="submit">Kirim</button>
-                <!-- OPSI A fallback: mailto -->
-                <a class="btn btn-ghost"
-                  href="mailto:hi@gojimms.com?subject=Halo%20gojimms">
+                <button class="btn btn-primary" type="submit">
+                  Kirim
+                </button>
+
+                <a
+                  class="btn btn-ghost"
+                  href="mailto:hi@gojimms.com?subject=Halo%20gojimms"
+                >
                   Email langsung
                 </a>
               </div>
 
               <p class="form-note">
-                Dengan mengirim pesan, kamu setuju datamu hanya dipakai untuk membalas pesan ini.
+                Dengan mengirim pesan, kamu setuju bahwa data yang dikirim hanya digunakan
+                untuk merespons kebutuhan komunikasi ini.
               </p>
             </form>
 
@@ -169,16 +220,20 @@
       </div>
     </section>
 
-   <!-- Footer injected -->
-  <div data-include="/partials/footer.html"></div>
+    <!-- Footer injected -->
+    <div data-include="/partials/footer.html"></div>
 
-<button id="scrollTop" class="scroll-top" aria-label="Back to top">
-  ↑
-</button>
+    <button id="scrollTop" class="scroll-top" aria-label="Back to top">
+      ↑
+    </button>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+    <script>
+      const yearEl = document.getElementById("year");
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
+    </script>
+  </main>
 
   <!-- Scripts -->
   <script src="/assets/js/darkmode.js" defer></script>
