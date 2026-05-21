@@ -1,0 +1,231 @@
+/* =========================
+   Scroll Reveal
+========================= */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 700ms ease, transform 700ms ease;
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hormati user yang tidak suka animasi */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* =========================
+   Micro Interactions (Premium)
+========================= */
+
+/* base: transisi halus */
+.work-item,
+.post-card,
+.cap,
+.card,
+.btn {
+  transition: transform 250ms ease, border-color 250ms ease, background 250ms ease;
+}
+
+/* hover/focus "lift" subtle */
+.work-item:hover,
+.work-item:focus-visible,
+.post-card:hover,
+.post-card:focus-visible,
+.cap:hover,
+.cap:focus-visible,
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-3px);
+}
+
+/* work-item lebih elegan: highlight border + background tipis */
+.work-item:hover,
+.work-item:focus-visible {
+  border-bottom-color: transparent; /* biar tidak terlihat "kepotong" */
+  background: color-mix(in oklab, var(--bg), var(--text) 3%);
+}
+
+/* post card: sedikit highlight */
+.post-card:hover,
+.post-card:focus-visible {
+  background: color-mix(in oklab, var(--bg), var(--text) 4%);
+}
+
+/* capabilities & snapshot cards */
+.cap:hover,
+.cap:focus-visible,
+.card:hover,
+.card:focus-visible {
+  border-color: color-mix(in oklab, var(--border), var(--text) 18%);
+}
+
+/* underline link lebih premium */
+.footer-link,
+.text-link,
+.nav-links a {
+  transition: border-color 200ms ease, color 200ms ease;
+}
+
+/* tombol: efek press */
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* glow lembut di dark mode (tidak maksa) */
+[data-theme="dark"] .work-item:hover,
+[data-theme="dark"] .post-card:hover,
+[data-theme="dark"] .cap:hover,
+[data-theme="dark"] .card:hover {
+  border-color: color-mix(in oklab, var(--border), white 14%);
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .work-item,
+  .post-card,
+  .cap,
+  .card,
+  .btn {
+    transition: none;
+  }
+  .work-item:hover,
+  .work-item:focus-visible,
+  .post-card:hover,
+  .post-card:focus-visible,
+  .cap:hover,
+  .cap:focus-visible,
+  .card:hover,
+  .card:focus-visible {
+    transform: none;
+  }
+}
+
+/* =========================
+   Scroll To Top Button
+========================= */
+
+.scroll-top {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 250ms ease, transform 250ms ease, border-color 250ms ease;
+  z-index: 9999;
+}
+
+.scroll-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.scroll-top:hover {
+  border-color: color-mix(in oklab, var(--border), var(--text) 22%);
+}
+
+/* Dark mode sedikit lebih "glow" */
+[data-theme="dark"] .scroll-top:hover {
+  border-color: color-mix(in oklab, var(--border), white 18%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-top {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* =========================
+   Hero Scroll Indicator
+========================= */
+
+.hero-scroll-indicator {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.scroll-text {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 28px;
+  background: var(--text);
+  opacity: 0.6;
+  animation: scrollLine 1.8s ease-in-out infinite;
+  transform-origin: top;
+}
+
+@keyframes scrollLine {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  30% {
+    transform: scaleY(1);
+    opacity: 0.8;
+  }
+  60% {
+    transform: scaleY(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scaleY(0);
+    opacity: 0;
+    transform-origin: bottom;
+  }
+}
+
+/* Dark mode sedikit lebih soft */
+[data-theme="dark"] .scroll-line {
+  opacity: 0.7;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-line {
+    animation: none;
+  }
+}
+
+/* =========================
+   Hero Parallax helpers
+========================= */
+.hero-left,
+.hero-card {
+  will-change: transform;
+}
